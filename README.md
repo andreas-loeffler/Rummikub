@@ -9,6 +9,10 @@ If you win the round you get the value of all your opponents remaining tile's as
 If you lose a round the value of your remaining tile's get subtracted from your points.
 When the game is over the player with the most points wins the game.
 
+## Project Status
+
+Simple string representation of the game board implemented.
+
 ## Installation
 
 coming soon...
