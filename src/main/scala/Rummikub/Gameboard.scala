@@ -1,0 +1,5 @@
+package Rummikub
+
+object Gameboard {
+
+}
