@@ -7,11 +7,11 @@ object GameBoard {
   }
 
   case class gameBoard(name1: String, name2: String, tokenStartAmount: Int) {
-    override def toString: String = name1 + name2 + "(" + tokenStartAmount + ")" + sb
+    override def toString: String = "(" + tokenStartAmount + ")" + sb
 
     val value: Array[Array[Int]] = Array.ofDim[Int](10, 14)
     val sb = new StringBuilder()
-    sb.append("Tokens in Game:").append(tokenStartAmount).append("\n")
+    sb.append("\n")
     sb.append("Player 01:").append(name1).append("\n")
     sb.append("Player 02:").append(name2).append("\n")
     for (x <- 0 to 14) {
