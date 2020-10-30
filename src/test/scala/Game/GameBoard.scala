@@ -3,6 +3,7 @@ package Game
 object GameBoard {
   def main(args: Array[String]): Unit = {
     println("Wanna play a game?\n")
+    println("yeah")
     println(gameBoard("Andreas", "Pascal", 104))
   }
 
