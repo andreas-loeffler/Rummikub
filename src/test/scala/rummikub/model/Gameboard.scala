@@ -1,6 +1,6 @@
-package Game
+package rummikub.model
 
-object GameBoard {
+object GameBoar{
   def main(args: Array[String]): Unit = {
     println("Wanna play a game?\n")
     println("yeah")
