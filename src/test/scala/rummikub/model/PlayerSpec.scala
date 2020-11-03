@@ -9,7 +9,7 @@ class PlayerSpec extends AnyWordSpec with Matchers {
     "have a name" in {
       Player("testName").name should be("testName")
     }
-    "have a represesntation with a String" in {
+    "have a representation with a String" in {
       Player("testName").toString should be("testName")
     }
   }
