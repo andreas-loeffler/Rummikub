@@ -6,9 +6,9 @@ import org.scalatest.wordspec.AnyWordSpec
 class FieldSpec extends AnyWordSpec with Matchers {
   "A Field" when {
     "new " should {
-      val field = Field(null)
+      val field = Field(' ',0)
       "not have a string" in {
-        field.tile should be(null)
+        field.color should be(' ')
       }
       "return a string representation " in {
         field.toString should be(null)
@@ -21,9 +21,9 @@ class FieldSpec extends AnyWordSpec with Matchers {
       }
     }
     "set to a specific string " should {
-      val nonEmptyField = Field("Yellow5")
+      val nonEmptyField = Field('Y',5)
       "return that tile" in {
-        nonEmptyField.tile startsWith "Yellow5"
+        nonEmptyField.color should be ('Y')
       }
       "have a name " in {
         nonEmptyField.toString startsWith "Yellow"
@@ -32,7 +32,7 @@ class FieldSpec extends AnyWordSpec with Matchers {
         nonEmptyField.isEmpty should be(false)
       }
       "when applied" in{
-        Field.apply("Yellow5").toString should be("Yellow5")
+        Field.apply('Y',5).toString should be('Y',5)
       }
     }
   }

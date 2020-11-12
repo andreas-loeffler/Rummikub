@@ -1,7 +1,9 @@
 package rummikub.model
 
-case class Field(tile: String) {
-  def isEmpty: Boolean = tile == null
+case class Field(color: Char, value:Int) {
+  def isEmpty: Boolean = color.equals(null)
 
-  override def toString: String = tile
+  override def toString: String = color.toString + value
+
+
 }
