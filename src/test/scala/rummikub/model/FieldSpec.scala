@@ -11,13 +11,13 @@ class FieldSpec extends AnyWordSpec with Matchers {
         field.color should be(' ')
       }
       "return a string representation " in {
-        field.toString should be(null)
+        field.toString should be(" 0")
       }
       "be empty" in {
         field.isEmpty should be(true)
       }
       "when unapplied" in{
-        Field.unapply(field).get should be(null)
+        Field.unapply(field).get should be(' ',0)
       }
     }
     "set to a specific string " should {
@@ -26,13 +26,13 @@ class FieldSpec extends AnyWordSpec with Matchers {
         nonEmptyField.color should be ('Y')
       }
       "have a name " in {
-        nonEmptyField.toString startsWith "Yellow"
+        nonEmptyField.toString should be("Y5")
       }
       "not be empty" in {
         nonEmptyField.isEmpty should be(false)
       }
       "when applied" in{
-        Field.apply('Y',5).toString should be('Y',5)
+        Field.apply('Y',5).toString should be("Y5")
       }
     }
   }
