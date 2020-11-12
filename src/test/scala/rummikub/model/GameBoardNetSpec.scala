@@ -44,6 +44,29 @@ class GameBoardNetSpec extends AnyWordSpec with Matchers {
       "insert another tile wrong" in {
         gameBoardNet.insertTile(0, 12, 'Y', 3).toString startsWith "I"
       }
+      gameBoardNet.resetValues()
+
+      "insert a base tile" in {
+        gameBoardNet.insertTile(0, 11, 'B', 2)
+      }
+      "return true for base tile" in {
+        gameBoardNet.isValid(0, 11) should be(true)
+        gameBoardNet.isColorValid(0, 11) should be(true)
+      }
+      "insert a tile at the end to test" in {
+        gameBoardNet.insertTile(0, 13, 'B', 4)
+      }
+      "return true of insert" in {
+        gameBoardNet.isValid(0, 13) should be(true)
+        gameBoardNet.isColorValid(0, 13) should be(true)
+      }
+      "insert a atile at the end to test" in {
+        gameBoardNet.insertTile(0, 12, 'B', 3)
+      }
+      "return atrue of insert" in {
+        gameBoardNet.isValid(0, 12) should be(true)
+        gameBoardNet.isColorValid(0, 12) should be(true)
+      }
       "print gameboard" in {
         gameBoardNet.printGameboard().toString startsWith "0"
       }
