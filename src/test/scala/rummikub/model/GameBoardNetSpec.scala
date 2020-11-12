@@ -16,64 +16,57 @@ class GameBoardNetSpec extends AnyWordSpec with Matchers {
         gameBoardNet.isValid(0, 0) should be(true)
         gameBoardNet.isColorValid(0, 0) should be(true)
       }
-      "insert a tile in the middle" in {
-        gameBoardNet.insertTile(0, 1, 'Y', 6)
+      "insert a 2nd tile " in {
         gameBoardNet.insertTile(0, 2, 'Y', 7)
+      }
+      "return true too" in {
+        gameBoardNet.isValid(0, 2) should be(true)
+        gameBoardNet.isColorValid(0, 2) should be(true)
+      }
+      "insert a tile between tiles" in {
+        gameBoardNet.insertTile(0, 1, 'Y', 6)
       }
       "return true aswell" in {
         gameBoardNet.isValid(0, 1) should be(true)
         gameBoardNet.isColorValid(0, 1) should be(true)
       }
-      "re-insert a tile" in {
-        gameBoardNet.insertTile(0, 1, 'Y', 6)
+      "insert a tile if next is none" in {
+        gameBoardNet.insertTile(0, 3, 'Y', 7)
       }
-      "return true too" in {
-        gameBoardNet.isValid(0, 1) should be(true)
-        gameBoardNet.isColorValid(0, 1) should be(true)
+      "return valid" in {
+        gameBoardNet.isValid(0, 3) should be(true)
+        gameBoardNet.isColorValid(0, 3) should be(true)
       }
       "insert a tile at the end" in {
-        gameBoardNet.insertTile(0, 13, 'B', 4)
+        gameBoardNet.insertTile(0, 13, 'B', 8)
       }
-      "return also true" in {
+      "return truee" in {
         gameBoardNet.isValid(0, 13) should be(true)
         gameBoardNet.isColorValid(0, 13) should be(true)
       }
-      "insert a tile wrong" in {
-        gameBoardNet.insertTile(0, 12, 'B', 6).toString startsWith "I"
+      "insert a wrong color tile " in {
+        gameBoardNet.insertTile(0, 4, 'B', 9)
       }
-      "insert another tile wrong" in {
-        gameBoardNet.insertTile(0, 12, 'Y', 3).toString startsWith "I"
+      "return true also " in {
+        gameBoardNet.isValid(0, 4) should be(false)
+        gameBoardNet.isColorValid(0, 4) should be(false)
       }
-      gameBoardNet.resetValues()
-
-      "insert a base tile" in {
-        gameBoardNet.insertTile(0, 11, 'B', 2)
+      "insert a wrong value tile " in {
+        gameBoardNet.insertTile(0, 4, 'Y', 3)
       }
-      "return true for base tile" in {
-        gameBoardNet.isValid(0, 11) should be(true)
-        gameBoardNet.isColorValid(0, 11) should be(true)
+      "return false " in {
+        gameBoardNet.isValid(0, 4) should be(false)
+        gameBoardNet.isColorValid(0, 4) should be(false)
       }
-      "insert a tile at the end to test" in {
-        gameBoardNet.insertTile(0, 13, 'B', 4)
+      "inserting at outOfBounds" in{
+        gameBoardNet.insertTile(55,55,'B',6).toString startsWith("Wrong")
       }
-      "return true of insert" in {
-        gameBoardNet.isValid(0, 13) should be(true)
-        gameBoardNet.isColorValid(0, 13) should be(true)
-      }
-      "insert a atile at the end to test" in {
-        gameBoardNet.insertTile(0, 12, 'B', 3)
-      }
-      "return atrue of insert" in {
-        gameBoardNet.isValid(0, 12) should be(true)
-        gameBoardNet.isColorValid(0, 12) should be(true)
-      }
-      "print gameboard" in {
-        gameBoardNet.printGameboard().toString startsWith "0"
-      }
-      "insert a wrong tile" in {
-        gameBoardNet.insertTile(14, 14, 'A', 77).toString startsWith "W"
+      "should be print a gameboard" in{
+        gameBoardNet.printGameboard().toString startsWith("Y")
       }
     }
+
+
   }
 
 }
