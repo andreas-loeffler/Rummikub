@@ -6,7 +6,7 @@ import rummikub.model.{Field, GameBoardNet, Player}
 
 class TextUI {
 
-  val gameBoardNet = new GameBoardNet(10, 14)
+  val gameBoardNet = new GameBoardNet()
   gameBoardNet.resetValues()
 
   def userInput(input: String): Unit = {

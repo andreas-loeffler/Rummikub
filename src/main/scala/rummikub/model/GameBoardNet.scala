@@ -1,16 +1,19 @@
 package rummikub.model
 
 
-case class GameBoardNet(x: Int, y: Int) {
-  var gameboard = Array.ofDim[Field](x, y)
+case class GameBoardNet() {
+  val gameboard: Vector[Vector[Field]] = Vector.fill(10, 14)(Field(' ', 0))
 
   def resetValues(): Unit = {
     for (x <- gameboard.indices) {
       for (y <- 0 until 14) {
-        gameboard(x)(y) = new Field(' ', 0)
+        gameboard(x)(y).setField(new Field(' ',0))
       }
     }
   }
+
+
+
 
   def printGameboard(): Unit = {
     val sb = new StringBuilder
@@ -29,10 +32,10 @@ case class GameBoardNet(x: Int, y: Int) {
       //insert between two tiles
       if (((gameboard(x)(y).value) < (gameboard(x)(y + 1).value)) && ((gameboard(x)(y).value) > (gameboard(x)(y - 1).value))) {
         return true
-      }//insert after tile and next tile is 0
+      } //insert after tile and next tile is 0
       else if ((gameboard(x)(y).value >= gameboard(x)(y - 1).value) && gameboard(x)(y + 1).value == 0) {
         return true
-      }//return false if nothing works
+      } //return false if nothing works
       else {
         return false
       }
@@ -48,7 +51,7 @@ case class GameBoardNet(x: Int, y: Int) {
       }
       }*/
 
-    return true
+    true
   }
 
 
@@ -58,7 +61,7 @@ case class GameBoardNet(x: Int, y: Int) {
       //insert between two tiles if color of next is same and color of before is same
       if (((gameboard(x)(y).color) == (gameboard(x)(y + 1).color)) && ((gameboard(x)(y).color) == (gameboard(x)(y - 1).color)) || gameboard(x)(y + 1).color == (' ') && gameboard(x)(y - 1).color == (' ')) {
         return true
-      }//insert if color of next is same or none and color of last is same or none
+      } //insert if color of next is same or none and color of last is same or none
       else if ((gameboard(x)(y).color.equals(gameboard(x)(y + 1).color) || gameboard(x)(y + 1).color.equals(' ')) && (gameboard(x)(y).color.equals(gameboard(x)(y - 1).color) || gameboard(x)(y - 1).color.equals(' '))) {
         return true
       } else {
@@ -66,7 +69,7 @@ case class GameBoardNet(x: Int, y: Int) {
       }
     } //check at posi 0
     else if (x < gameboard.length && y < gameboard(x).length - 1) {
-      if (gameboard(x)(y).color.equals(gameboard(x)(y + 1).color) || gameboard(x)(y + 1).color.equals(' ')) {
+      if (gameboard(x)(y).color == (gameboard(x)(y + 1).color) || gameboard(x)(y + 1).color == (' ')) {
         return true
       }
     } //check at last posi
@@ -82,19 +85,20 @@ case class GameBoardNet(x: Int, y: Int) {
   def insertTile(x: Int, y: Int, c: Char, v: Int): Unit = {
     val sb = new StringBuilder
     try {
-      gameboard(x)(y) = Field(c, v)
+      val field: Field =  new Field(c,v)
+      gameboard(x)(y).copy(c,v)
     } catch {
       case e: ArrayIndexOutOfBoundsException => println("Wrong input, position is not valid")
-      return
+        return
     }
     if (!isValid(x, y)) {
       println("Input at this Position " + x + "," + y + " not valid, re-check your move!")
-      gameboard(x)(y) = Field(' ', 0)
+      gameboard(x)(y).setField(new Field(' ',0))
       return
     }
     if (!isColorValid(x, y)) {
       println("Input at this Position " + x + "," + y + " not valid, re-check your move!")
-      gameboard(x)(y) = Field(' ', 0)
+      gameboard(x)(y).setField(new Field(' ',0))
       return
     }
     sb.append("Valid move: ")

@@ -7,7 +7,7 @@ import org.scalatest.wordspec.AnyWordSpec
 class TextUISpec extends AnyWordSpec with Matchers {
   "A TextUI" when {
     "new " should {
-      val gameBoardNet = new GameBoardNet(10, 14)
+      val gameBoardNet = new GameBoardNet()
       gameBoardNet.resetValues()
       val txt = new TextUI
       "print the gameboard" in {

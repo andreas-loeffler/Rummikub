@@ -7,7 +7,7 @@ import org.scalatest.wordspec.AnyWordSpec
 class GameBoardNetSpec extends AnyWordSpec with Matchers {
   "A Gameboard" when {
     "new " should {
-      val gameBoardNet = GameBoardNet(10, 14)
+      val gameBoardNet = GameBoardNet()
       gameBoardNet.resetValues()
       "insert a tile " in {
         gameBoardNet.insertTile(0, 0, 'Y', 5)
