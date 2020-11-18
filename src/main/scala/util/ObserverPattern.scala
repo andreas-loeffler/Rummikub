@@ -2,7 +2,7 @@ package util
 
 
 class TestObject extends Observer {
-  def update: Unit = println("Ping")
+  def update(): Unit = println("Ping")
 }
 
 object ObserverPattern {

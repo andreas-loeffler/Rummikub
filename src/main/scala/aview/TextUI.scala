@@ -1,24 +1,27 @@
 package aview
 
-import model.GameBoardNet
+import controller.Controller
+import util.Observer
 
 import scala.util.{Failure, Success, Try}
 
 
-class TextUI {
+class TextUI(controller: Controller) extends Observer{
+  controller.add(this)
+  //val gameBoardNet: GameBoardNet = GameBoardNet()
+  //gameBoardNet.resetValues()
 
-  val gameBoardNet: GameBoardNet = GameBoardNet()
-  gameBoardNet.resetValues()
 
   def userInput(input: String): Boolean = {
     val splitinput = input.split(" ")
     Try(
       splitinput(0)
       match {
-        case "print" => print(gameBoardNet.printGameboard())
-        case "insert" => gameBoardNet.insertTile(splitinput(1).toInt, splitinput(2).toInt, splitinput(3).charAt(0), splitinput(4).toInt)
+        case "create" => controller.createEmptyGameBoard()
+        case "print" => print(controller.printGameBoard())
+        case "insert" => controller.insertTile(splitinput(1).toInt, splitinput(2).toInt, splitinput(3).charAt(0), splitinput(4).toInt)
         case "quit" => println("Bye!")
-        case "reset" => gameBoardNet.resetValues()
+        case "reset" => controller.resetGameBoard()
       }
     )
     match {
@@ -28,5 +31,5 @@ class TextUI {
 
   }
 
-
+  override def update: Unit = println(controller.printGameBoard())
 }

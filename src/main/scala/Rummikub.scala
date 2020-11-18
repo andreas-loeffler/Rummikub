@@ -1,35 +1,41 @@
 
 import aview.TextUI
+import controller.Controller
 import model.GameBoardNet
 
 import scala.io.StdIn.readLine
 
 object Rummikub {
-  val gameBoardNet = new GameBoardNet()
-  gameBoardNet.resetValues()
-  val tui = new TextUI
+  //val gameBoardNet = new GameBoardNet()
+  //gameBoardNet.resetValues()
+
+
+  val controller = new Controller(new GameBoardNet())
+  val textUI = new TextUI(controller)
+  controller.notifyObservers
 
   def main(args: Array[String]): Unit = {
-     gameBoardNet.insertTile(0, 0, 'Y', 5) //valid
-     gameBoardNet.insertTile(0, 1, 'B', 4)
-     gameBoardNet.insertTile(1, 2, 'Y', 3) //valid
-     gameBoardNet.insertTile(1, 3, 'Y', 4) //valid
-     gameBoardNet.insertTile(1, 4, 'B', 5) //not valid
-     gameBoardNet.insertTile(1, 13, 'B', 4) //valid
-     gameBoardNet.insertTile(1, 11, 'B', 4) //valid
-     gameBoardNet.insertTile(1, 4, 'Y', 5) //valid
-     gameBoardNet.insertTile(1, 10, 'B', 4) //not valid
-     gameBoardNet.insertTile(1, 10, 'B', 3) //valid
-     gameBoardNet.insertTile(3, 10, 'P', 14) //valid
-     print(gameBoardNet.printGameboard())
-
- /*   var input: String = ""
+    /*  gameBoardNet.insertTile(0, 0, 'Y', 5) //valid
+      gameBoardNet.insertTile(0, 1, 'B', 4)
+      gameBoardNet.insertTile(1, 2, 'Y', 3) //valid
+      gameBoardNet.insertTile(1, 3, 'Y', 4) //valid
+      gameBoardNet.insertTile(1, 4, 'B', 5) //not valid
+      gameBoardNet.insertTile(1, 13, 'B', 4) //valid
+      gameBoardNet.insertTile(1, 11, 'B', 4) //valid
+      gameBoardNet.insertTile(1, 4, 'Y', 5) //valid
+      gameBoardNet.insertTile(1, 10, 'B', 4) //not valid
+      gameBoardNet.insertTile(1, 10, 'B', 3) //valid
+      gameBoardNet.insertTile(3, 10, 'P', 14) //valid
+      gameBoardNet.insertTile(0,1,'Y',1)
+      print(gameBoardNet.printGameboard())
+ */
+    var input: String = ""
     do {
       print(">>")
       input = readLine()
-      tui.userInput(input)
+      textUI.userInput(input)
     } while (input != "quit")
-*/
+
 
   }
 
