@@ -1,6 +1,6 @@
 package model
 
-import scala.util.{Failure, Success, Try}
+import scala.util.{Success, Try}
 
 case class GameBoardNet() {
 
@@ -73,6 +73,7 @@ case class GameBoardNet() {
   }
 
   //Color checkers
+
   //if x is greater and less than size and y is greater than 0 and -1 of length
   def function1Color(x: Int, y: Int): Boolean = {
     x >= 0 && x < gameboard.length && y > 0 && y < gameboard(x).length - 1
@@ -130,7 +131,7 @@ case class GameBoardNet() {
     ) match {
       case Success(true) => println("Success!")
       case Success(false) => println("Input at this Position " + x + "," + y + " not valid, re-check your move!"); gameboard = gameboard.updated2(x, y)(Field(' ', 0)); return false
-      case Failure(exception) => println("Wrong input, position is not valid")
+
     }
 
 
