@@ -1,14 +1,13 @@
-package gameboard
+package aview
 
+import model.GameBoardNet
 
-import rummikub.model.{Field, GameBoardNet, Player}
-
-import scala.util.{Try, Success, Failure}
+import scala.util.{Failure, Success, Try}
 
 
 class TextUI {
 
-  val gameBoardNet = new GameBoardNet()
+  val gameBoardNet: GameBoardNet = GameBoardNet()
   gameBoardNet.resetValues()
 
   def userInput(input: String): Boolean = {
@@ -16,14 +15,14 @@ class TextUI {
     Try(
       splitinput(0)
       match {
-        case "print" => gameBoardNet.printGameboard()
+        case "print" => print(gameBoardNet.printGameboard())
         case "insert" => gameBoardNet.insertTile(splitinput(1).toInt, splitinput(2).toInt, splitinput(3).charAt(0), splitinput(4).toInt)
         case "quit" => println("Bye!")
         case "reset" => gameBoardNet.resetValues()
       }
     )
     match {
-      case Success(noexception) => return true
+      case Success(noexception) => true
       case Failure(exception) => println("Invalid Arguments!"); false
     }
 

@@ -1,7 +1,6 @@
-package rummikub.model
+package model
 
-import scala.util.{Try, Success, Failure}
-
+import scala.util.{Failure, Success, Try}
 
 case class GameBoardNet() {
 
@@ -12,12 +11,9 @@ case class GameBoardNet() {
 
   implicit def vectorToUpdatableVector2[T](v: Vector[Vector[T]]) = new UpdatableVector2(v)
 
-  var gameboard = Vector.fill(10, 14)(Field(' ', 0))
-  var a = gameboard.updated2(0, 1)(Field('Y', 3))
-  println(a)
-  a = a.updated2(0, 0)(Field('Y', 2))
+  var gameboard: Vector[Vector[Field]] = Vector.fill(10, 14)(Field(' ', 0))
 
-  def printGameboard(): Unit = {
+  def printGameboard(): String = {
     val sb = new StringBuilder
     for (x <- gameboard.indices) {
       for (y <- 0 until 14) {
@@ -25,22 +21,23 @@ case class GameBoardNet() {
       }
       sb.append("\n")
     }
-    print(sb)
+    sb.toString()
   }
 
 
-  def resetValues(): Unit = {
+  def resetValues(): Boolean = {
     for (x <- gameboard.indices) {
       for (y <- 0 until 14) {
         gameboard = gameboard.updated2(x, y)(Field(' ', 0))
       }
     }
+    true
   }
 
   //cgeck if insert is bwtween two tiles
   def isValidB2T(x: Int, y: Int): Boolean = {
     if (x >= 0 && x < gameboard.length && y > 0 && y < gameboard(x).length - 1) {
-      if (((gameboard(x)(y).value) < (gameboard(x)(y + 1).value)) && ((gameboard(x)(y).value) > (gameboard(x)(y - 1).value)))
+      if ((gameboard(x)(y).value < gameboard(x)(y + 1).value) && (gameboard(x)(y).value > gameboard(x)(y - 1).value))
         return true
     }
     false
@@ -58,7 +55,7 @@ case class GameBoardNet() {
   //check at posi 0
   def isValidInitPosi(x: Int, y: Int): Boolean = {
     if (x < gameboard.length && y < gameboard(x).length - 1) {
-      if (((gameboard(x)(y).value) >= (gameboard(x)(y + 1).value))) {
+      if (gameboard(x)(y).value >= gameboard(x)(y + 1).value) {
         return true
       }
     }
@@ -68,7 +65,7 @@ case class GameBoardNet() {
   //check at last posi
   def isValidLastPosi(x: Int, y: Int): Boolean = {
 
-    if (((gameboard(x)(y).value) >= (gameboard(x)(y + 1).value))) {
+    if (gameboard(x)(y).value >= gameboard(x)(y + 1).value) {
       return true
 
     }
@@ -78,26 +75,26 @@ case class GameBoardNet() {
   //Color checkers
   //if x is greater and less than size and y is greater than 0 and -1 of length
   def function1Color(x: Int, y: Int): Boolean = {
-    return x >= 0 && x < gameboard.length && y > 0 && y < gameboard(x).length - 1
+    x >= 0 && x < gameboard.length && y > 0 && y < gameboard(x).length - 1
   }
 
   //insert between two tiles if color of next is same and color of before is same
   def function2Color(x: Int, y: Int): Boolean = {
-    return ((gameboard(x)(y).color) == (gameboard(x)(y + 1).color)) && ((gameboard(x)(y).color) == (gameboard(x)(y - 1).color)) || gameboard(x)(y + 1).color == (' ') && gameboard(x)(y - 1).color == (' ')
+    (gameboard(x)(y).color == gameboard(x)(y + 1).color) && (gameboard(x)(y).color == gameboard(x)(y - 1).color) || gameboard(x)(y + 1).color == ' ' && gameboard(x)(y - 1).color == ' '
   }
 
   //insert if color of next is same or none and color of last is same or none
   def function3Color(x: Int, y: Int): Boolean = {
-    return (gameboard(x)(y).color.equals(gameboard(x)(y + 1).color) || gameboard(x)(y + 1).color.equals(' ')) && (gameboard(x)(y).color.equals(gameboard(x)(y - 1).color) || gameboard(x)(y - 1).color.equals(' '))
+    (gameboard(x)(y).color.equals(gameboard(x)(y + 1).color) || gameboard(x)(y + 1).color.equals(' ')) && (gameboard(x)(y).color.equals(gameboard(x)(y - 1).color) || gameboard(x)(y - 1).color.equals(' '))
   }
 
   //check at posi 0
   def function4Color(x: Int, y: Int): Boolean = {
-    return x < gameboard.length && y < gameboard(x).length - 1
+    x < gameboard.length && y < gameboard(x).length - 1
   }
 
   def function5Color(x: Int, y: Int): Boolean = {
-    return gameboard(x)(y).color == (gameboard(x)(y + 1).color) || gameboard(x)(y + 1).color == (' ')
+    gameboard(x)(y).color == gameboard(x)(y + 1).color || gameboard(x)(y + 1).color == ' '
   }
 
   def isColorValid(x: Int, y: Int): Boolean = {
@@ -125,20 +122,20 @@ case class GameBoardNet() {
     false
   }
 
-  def insertTile(x: Int, y: Int, c: Char, v: Int): Unit = {
+  def insertTile(x: Int, y: Int, c: Char, v: Int): Boolean = {
     val sb = new StringBuilder
     gameboard = gameboard.updated2(x, y)(Field(c, v))
     Try(
       allValid(x, y)
     ) match {
       case Success(true) => println("Success!")
-      case Success(false) => println("Input at this Position " + x + "," + y + " not valid, re-check your move!"); gameboard = gameboard.updated2(x, y)(Field(' ', 0))
+      case Success(false) => println("Input at this Position " + x + "," + y + " not valid, re-check your move!"); gameboard = gameboard.updated2(x, y)(Field(' ', 0)); return false
       case Failure(exception) => println("Wrong input, position is not valid")
     }
 
 
     sb.append(gameboard(x)(y).color).append(gameboard(x)(y).value)
     println(sb.toString())
-
+    true
   }
 }

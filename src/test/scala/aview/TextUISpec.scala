@@ -1,6 +1,6 @@
-package rummikub.model
+package aview
 
-import gameboard.TextUI
+import model.GameBoardNet
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 
