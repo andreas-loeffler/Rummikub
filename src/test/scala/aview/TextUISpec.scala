@@ -11,7 +11,7 @@ class TextUISpec extends AnyWordSpec with Matchers {
       gameBoardNet.resetValues()
       val txt = new TextUI
       "print the gameboard" in {
-        txt.userInput("print") should be(gameBoardNet.printGameboard())
+        txt.userInput("print") should be(true)
       }
       "insert a tile" in {
         txt.userInput("insert 0 0 Y 5") should be(gameBoardNet.insertTile(0, 0, 'Y', 5))
@@ -29,7 +29,7 @@ class TextUISpec extends AnyWordSpec with Matchers {
         txt.userInput("insert 3 4").toString startsWith ("I")
       }
       "throw also an error" in {
-        txt.userInput("insert a b Y 4").toString startsWith ("W")
+        txt.userInput("insert a b Y 4").toString startsWith ("I")
       }
 
     }
