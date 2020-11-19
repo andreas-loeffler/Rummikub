@@ -72,17 +72,17 @@ case class GameBoardNet() {
 
   //Color checkers
 
-  //if x is greater and less than size and y is greater than 0 and -1 of length
+
   def function1Color(x: Int, y: Int): Boolean = {
     x >= 0 && x < gameboard.length && y > 0 && y < gameboard(x).length - 1
   }
 
-  //insert between two tiles if color of next is same and color of before is same
+
   def function2Color(x: Int, y: Int): Boolean = {
     (gameboard(x)(y).color == gameboard(x)(y + 1).color) && (gameboard(x)(y).color == gameboard(x)(y - 1).color) || gameboard(x)(y + 1).color == ' ' && gameboard(x)(y - 1).color == ' '
   }
 
-  //insert if color of next is same or none and color of last is same or none
+
   def function3Color(x: Int, y: Int): Boolean = {
     (gameboard(x)(y).color.equals(gameboard(x)(y + 1).color) || gameboard(x)(y + 1).color.equals(' ')) && (gameboard(x)(y).color.equals(gameboard(x)(y - 1).color) || gameboard(x)(y - 1).color.equals(' '))
   }
