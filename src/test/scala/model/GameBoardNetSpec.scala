@@ -38,7 +38,7 @@ class GameBoardNetSpec extends AnyWordSpec with Matchers {
 
       "insert wrong tiles" in {
         gameBoardNet.insertTile(0, 2, 'B', 1).toString startsWith "I"
-        gameBoardNet.insertTile(10,14,'B',5).toString startsWith("I")
+        gameBoardNet.insertTile(10,14,'B',5).toString startsWith "I"
       }
       "return then false " in {
         gameBoardNet.isColorValid(0, 2) should be(false)

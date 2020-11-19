@@ -129,7 +129,6 @@ case class GameBoardNet() {
 
     gameboard = gameboard.updated2(x, y)(Field(c, v))
 
-
     Try(
       allValid(x, y)
     ) match {
