@@ -23,13 +23,13 @@ class TextUISpec extends AnyWordSpec with Matchers {
         txt.userInput("reset") should be(true)
       }
       "throw an error" in {
-        txt.userInput("test").toString startsWith ("I")
+        txt.userInput("test").toString startsWith "I"
       }
       "throw another error" in {
-        txt.userInput("insert 3 4").toString startsWith ("I")
+        txt.userInput("insert 3 4").toString startsWith "I"
       }
       "throw also an error" in {
-        txt.userInput("insert a b Y 4").toString startsWith ("I")
+        txt.userInput("insert a b Y 4").toString startsWith "I"
       }
       "return true " in{
         txt.userInput("create") should be(true)
