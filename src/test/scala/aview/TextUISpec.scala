@@ -29,7 +29,8 @@ class TextUISpec extends AnyWordSpec with Matchers {
         txt.userInput("insert 3 4").toString startsWith "I"
       }
       "throw also an error" in {
-        txt.userInput("insert a b Y 4").toString startsWith "I"
+        txt.userInput("insert a b Y 4").toString startsWith ("I")
+
       }
       "return true " in{
         txt.userInput("create") should be(true)
