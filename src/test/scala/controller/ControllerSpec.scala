@@ -15,6 +15,7 @@ class ControllerSpec extends AnyWordSpec with Matchers{
       def isUpdated: Boolean = updated
       override def update: Unit = updated = true
     }
+
     controller.add(observer)
     "notify Observer after" in{
       controller.resetGameBoard()
