@@ -1,17 +1,9 @@
 package model
 
-import scala.util.{Failure, Success, Try}
+case class GameBoardNet(gameboard: Vector[Vector[Field]]) {
 
-case class GameBoardNet() {
+  def this() = this(Vector.tabulate(10, 14)((x, y) => Field(' ', 0)))
 
-  class UpdatableVector2[T](v: Vector[Vector[T]]) {
-    def updated2(c1: Int, c2: Int)(newVal: T) =
-      v.updated(c1, v(c1).updated(c2, newVal))
-  }
-
-  implicit def vectorToUpdatableVector2[T](v: Vector[Vector[T]]) = new UpdatableVector2(v)
-
-  var gameboard: Vector[Vector[Field]] = Vector.fill(10, 14)(Field(' ', 0))
 
   def printGameboard(): String = {
     val sb = new StringBuilder
@@ -25,14 +17,8 @@ case class GameBoardNet() {
   }
 
 
-  def resetValues(): Boolean = {
-    for (x <- gameboard.indices) {
-      for (y <- 0 until 14) {
-        gameboard = gameboard.updated2(x, y)(Field(' ', 0))
-      }
-    }
-    true
-  }
+  def resetValues(x: Int, y: Int): GameBoardNet = copy(gameboard.updated(x, gameboard(x).updated(y, Field(' ', 0))))
+
 
   def function1(x: Int, y: Int): Boolean = {
     x >= 0 && x < gameboard.length && y > 0 && y < gameboard(x).length - 1
@@ -120,25 +106,19 @@ case class GameBoardNet() {
     false
   }
 
-  def insertTile(x: Int, y: Int, c: Char, v: Int): Boolean = {
-    val sb = new StringBuilder
+
+  def insertTile(x: Int, y: Int, c: Char, v: Int): GameBoardNet = {
     if (x > 9 && y > 13) {
       println("Invalid position!")
-      return false
+      val gameBoardNetException = copy(gameboard)
+      return gameBoardNetException
     }
 
-    gameboard = gameboard.updated2(x, y)(Field(c, v))
+    val insertedGameboard = copy(gameboard.updated(x, gameboard(x).updated(y, Field(c, v))))
+    val insertedWGameboard = copy(gameboard.updated(x, gameboard(x).updated(y, Field(' ', 0))))
+    if (!insertedGameboard.allValid(x, y))
+      return insertedWGameboard
 
-    Try(
-      allValid(x, y)
-    ) match {
-      case Success(true) => println("Success!")
-      case Success(false) => println("Input at this Position " + x + "," + y + " not valid, re-check your move!"); gameboard = gameboard.updated2(x, y)(Field(' ', 0)); return false
-    }
-
-
-    sb.append(gameboard(x)(y).color).append(gameboard(x)(y).value)
-    println(sb.toString())
-    true
+    insertedGameboard
   }
 }

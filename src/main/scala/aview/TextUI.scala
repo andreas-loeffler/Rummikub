@@ -6,10 +6,8 @@ import util.Observer
 import scala.util.{Failure, Success, Try}
 
 
-class TextUI(controller: Controller) extends Observer{
+class TextUI(controller: Controller) extends Observer {
   controller.add(this)
-  //val gameBoardNet: GameBoardNet = GameBoardNet()
-  //gameBoardNet.resetValues()
 
 
   def userInput(input: String): Boolean = {
@@ -17,7 +15,7 @@ class TextUI(controller: Controller) extends Observer{
     Try(
       splitinput(0)
       match {
-        case "create" => controller.createEmptyGameBoard()
+        case "create" => controller.createGameboard()
         case "print" => print(controller.printGameBoard())
         case "insert" => controller.insertTile(splitinput(1).toInt, splitinput(2).toInt, splitinput(3).charAt(0), splitinput(4).toInt)
         case "quit" => println("Bye!")
