@@ -78,9 +78,7 @@ case class GameBoardNet(gameboard: Vector[Vector[Field]]) {
     x < gameboard.length && y < gameboard(x).length - 1
   }
 
-  def function5Color(x: Int, y: Int): Boolean = {
-    gameboard(x)(y).color == gameboard(x)(y + 1).color || gameboard(x)(y + 1).color == ' '
-  }
+  def function5Color(x: Int, y: Int): Boolean = gameboard(x)(y).color == gameboard(x)(y + 1).color || gameboard(x)(y + 1).color == ' '
 
   def isColorValid(x: Int, y: Int): Boolean = {
     if (function1Color(x, y)) {
@@ -99,12 +97,7 @@ case class GameBoardNet(gameboard: Vector[Vector[Field]]) {
   }
 
 
-  def allValid(x: Int, y: Int): Boolean = {
-    if (isNumberValid(x, y) && isColorValid(x, y)) {
-      return true
-    }
-    false
-  }
+  def allValid(x: Int, y: Int): Boolean = isNumberValid(x, y) && isColorValid(x, y)
 
 
   def insertTile(x: Int, y: Int, c: Char, v: Int): GameBoardNet = {
