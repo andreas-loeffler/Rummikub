@@ -28,8 +28,8 @@ object Rummikub {
     gameBoardNet = gameBoardNet.insertTile(3, 10, 'P', 14) //valid
     gameBoardNet = gameBoardNet.insertTile(0, 1, 'Y', 1)
     print(gameBoardNet.printGameboard())
-*/
-     var input: String = ""
+
+*/     var input: String = ""
      do {
        print(">>")
        input = readLine()
