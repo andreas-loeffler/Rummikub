@@ -1,6 +1,6 @@
 package controller
 
-import model.GameBoardNet
+import model.{GameBoardNet, State}
 import util.Observable
 
 class Controller(var gameBoardNet: GameBoardNet) extends Observable {
@@ -10,6 +10,7 @@ class Controller(var gameBoardNet: GameBoardNet) extends Observable {
       for (y <- 0 until 14) {
         gameBoardNet = gameBoardNet.resetValues(x, y)
       }
+
 
     }
     notifyObservers
@@ -27,6 +28,11 @@ class Controller(var gameBoardNet: GameBoardNet) extends Observable {
 
   def printGameBoard(): String = {
     gameBoardNet.printGameboard()
+  }
+
+  def handle(): Unit = {
+    var state = State
+    state.handle(gameBoardNet.isEmptyBoard())
   }
 
 }

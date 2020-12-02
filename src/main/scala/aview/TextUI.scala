@@ -6,7 +6,7 @@ import util.Observer
 import scala.util.{Failure, Success, Try}
 
 
-class TextUI(controller: Controller) extends Observer {
+class TextUI(controller: Controller) extends Observer{
   controller.add(this)
 
 
@@ -20,6 +20,7 @@ class TextUI(controller: Controller) extends Observer {
         case "insert" => controller.insertTile(splitinput(1).toInt, splitinput(2).toInt, splitinput(3).charAt(0), splitinput(4).toInt)
         case "quit" => println("Bye!")
         case "reset" => controller.resetGameBoard()
+        case "status" => controller.handle()
       }
     )
     match {

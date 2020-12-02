@@ -1,14 +1,13 @@
 
 import aview.TextUI
 import controller.Controller
-import model.GameBoardNet
+import model.{GameBoardNet, State}
 
 import scala.io.StdIn.readLine
 
 object Rummikub {
   //var gameBoardNet = new GameBoardNet()
   //gameBoardNet.resetValues()
-
 
   val controller = new Controller(new GameBoardNet())
   val textUI = new TextUI(controller)

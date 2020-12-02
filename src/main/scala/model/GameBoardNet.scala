@@ -16,6 +16,21 @@ case class GameBoardNet(gameboard: Vector[Vector[Field]]) {
     sb.toString()
   }
 
+  def isEmptyBoard(): Boolean = {
+    var v: Boolean = true
+    for (x <- gameboard.indices) {
+      for (y <- 0 until 14) {
+        if (gameboard(x)(y).isEmpty)
+          v = true
+        else {
+          v = false
+          return v
+        }
+      }
+    }
+    v
+  }
+
 
   def resetValues(x: Int, y: Int): GameBoardNet = copy(gameboard.updated(x, gameboard(x).updated(y, Field(' ', 0))))
 
@@ -24,21 +39,13 @@ case class GameBoardNet(gameboard: Vector[Vector[Field]]) {
     x >= 0 && x < gameboard.length && y > 0 && y < gameboard(x).length - 1
   }
 
-  def validInsertBetween(x: Int, y: Int): Boolean = {
-    (gameboard(x)(y).value < gameboard(x)(y + 1).value) && (gameboard(x)(y).value > gameboard(x)(y - 1).value)
-  }
+  def validInsertBetween(x: Int, y: Int): Boolean = (gameboard(x)(y).value < gameboard(x)(y + 1).value) && (gameboard(x)(y).value > gameboard(x)(y - 1).value)
 
-  def validInsertATNT0(x: Int, y: Int): Boolean = {
-    (gameboard(x)(y).value >= gameboard(x)(y - 1).value) && gameboard(x)(y + 1).value == 0
-  }
+  def validInsertATNT0(x: Int, y: Int): Boolean = (gameboard(x)(y).value >= gameboard(x)(y - 1).value) && gameboard(x)(y + 1).value == 0
 
-  def validInsertP0a(x: Int, y: Int): Boolean = {
-    x < gameboard.length && y < gameboard(x).length - 1
-  }
+  def validInsertP0a(x: Int, y: Int): Boolean = x < gameboard.length && y < gameboard(x).length - 1
 
-  def validInsertP0b(x: Int, y: Int): Boolean = {
-    gameboard(x)(y).value >= gameboard(x)(y + 1).value
-  }
+  def validInsertP0b(x: Int, y: Int): Boolean = gameboard(x)(y).value >= gameboard(x)(y + 1).value
 
   def isNumberValid(x: Int, y: Int): Boolean = {
     if (function1(x, y)) {
@@ -59,24 +66,16 @@ case class GameBoardNet(gameboard: Vector[Vector[Field]]) {
   //Color checkers
 
 
-  def function1Color(x: Int, y: Int): Boolean = {
-    x >= 0 && x < gameboard.length && y > 0 && y < gameboard(x).length - 1
-  }
+  def function1Color(x: Int, y: Int): Boolean = x >= 0 && x < gameboard.length && y > 0 && y < gameboard(x).length - 1
 
 
-  def function2Color(x: Int, y: Int): Boolean = {
-    (gameboard(x)(y).color == gameboard(x)(y + 1).color) && (gameboard(x)(y).color == gameboard(x)(y - 1).color) || gameboard(x)(y + 1).color == ' ' && gameboard(x)(y - 1).color == ' '
-  }
+  def function2Color(x: Int, y: Int): Boolean = (gameboard(x)(y).color == gameboard(x)(y + 1).color) && (gameboard(x)(y).color == gameboard(x)(y - 1).color) || gameboard(x)(y + 1).color == ' ' && gameboard(x)(y - 1).color == ' '
 
 
-  def function3Color(x: Int, y: Int): Boolean = {
-    (gameboard(x)(y).color.equals(gameboard(x)(y + 1).color) || gameboard(x)(y + 1).color.equals(' ')) && (gameboard(x)(y).color.equals(gameboard(x)(y - 1).color) || gameboard(x)(y - 1).color.equals(' '))
-  }
+  def function3Color(x: Int, y: Int): Boolean = (gameboard(x)(y).color.equals(gameboard(x)(y + 1).color) || gameboard(x)(y + 1).color.equals(' ')) && (gameboard(x)(y).color.equals(gameboard(x)(y - 1).color) || gameboard(x)(y - 1).color.equals(' '))
 
   //check at posi 0
-  def function4Color(x: Int, y: Int): Boolean = {
-    x < gameboard.length && y < gameboard(x).length - 1
-  }
+  def function4Color(x: Int, y: Int): Boolean = x < gameboard.length && y < gameboard(x).length - 1
 
   def function5Color(x: Int, y: Int): Boolean = gameboard(x)(y).color == gameboard(x)(y + 1).color || gameboard(x)(y + 1).color == ' '
 
