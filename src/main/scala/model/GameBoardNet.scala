@@ -18,28 +18,14 @@ case class GameBoardNet(gameboard: Vector[Vector[Field]]) {
       tiles = ("R" + x) :: tiles
       tiles = ("B" + x) :: tiles
     }
-    tiles = ("J") :: tiles
-    tiles = ("J") :: tiles
+    tiles = "J" :: tiles
+    tiles = "J" :: tiles
     tiles
   }
 
-  def player1(name: String): Player = {
-    val player = new Player(name)
-    player1 = player
-    player1
-  }
+  def getXSize(): Int = gameboard.size
 
-  def player2(name: String): Player = {
-    val player = new Player(name)
-    player2 = player
-    player2
-  }
-
-  def player3(name: String): Player = {
-    val player = new Player(name)
-    player3 = player
-    player3
-  }
+  def getYSize(): Int = gameboard(1).size
 
 
   def printGameboard(): String = {

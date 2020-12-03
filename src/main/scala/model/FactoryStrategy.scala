@@ -21,7 +21,7 @@ private class SmallGameBoardNetStrategy extends FactoryStrategy {
 }
 
 object FactoryStrategy {
-  def apply(kind: String) = kind match {
+  def apply(kind: String): GameBoardNet = kind match {
     case "big" => new BigGameBoardNetStrategy().setSize()
     case "small" => new SmallGameBoardNetStrategy().setSize()
   }
