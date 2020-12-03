@@ -2,13 +2,58 @@ package model
 
 case class GameBoardNet(gameboard: Vector[Vector[Field]]) {
 
-  def this() = this(Vector.tabulate(10, 14)((x, y) => Field(' ', 0)))
+  def this() = this(Vector.tabulate(11, 14)((x, y) => Field(' ', 0)))
+
+  def this(xS: Int, yS: Int) = this(Vector.tabulate(xS, yS)((x, y) => Field(' ', 0)))
+
+  var player1: Player = Player()
+  var player2: Player = Player()
+  var player3: Player = Player()
+  var tiles: List[String] = List()
+
+  def fillTiles(): List[String] = {
+    for (x <- 1 until 15) {
+      tiles = ("S" + x) :: tiles
+      tiles = ("G" + x) :: tiles
+      tiles = ("R" + x) :: tiles
+      tiles = ("B" + x) :: tiles
+    }
+    tiles = ("J") :: tiles
+    tiles = ("J") :: tiles
+    tiles
+  }
+
+  def player1(name: String): Player = {
+    val player = new Player(name)
+    player1 = player
+    player1
+  }
+
+  def player2(name: String): Player = {
+    val player = new Player(name)
+    player2 = player
+    player2
+  }
+
+  def player3(name: String): Player = {
+    val player = new Player(name)
+    player3 = player
+    player3
+  }
 
 
   def printGameboard(): String = {
     val sb = new StringBuilder
+    sb.append("Available tiles: ").append(this.tiles).append("\n")
+    sb.append("Scores:").append("\n")
+    if (this.player1.name != null && this.player2.name != null) {
+      sb.append(this.player1.name).append(": ").append(this.player1.tiles).append("\n")
+      sb.append(this.player2.name).append(": ").append(this.player2.tiles).append("\n")
+    }
+    if (this.player3.name != null)
+      sb.append(this.player3.name).append(": ").append(this.player3.tiles).append("\n")
     for (x <- gameboard.indices) {
-      for (y <- 0 until 14) {
+      for (y <- gameboard(1).indices) {
         sb.append(gameboard(x)(y).color).append(gameboard(x)(y).value).append("|")
       }
       sb.append("\n")
@@ -100,7 +145,7 @@ case class GameBoardNet(gameboard: Vector[Vector[Field]]) {
 
 
   def insertTile(x: Int, y: Int, c: Char, v: Int): GameBoardNet = {
-    if (x > 9 && y > 13) {
+    if (x > gameboard.size && y > gameboard(1).size) {
       println("Invalid position!")
       val gameBoardNetException = copy(gameboard)
       return gameBoardNetException

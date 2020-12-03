@@ -19,7 +19,6 @@ class ControllerSpec extends AnyWordSpec with Matchers{
     controller.add(observer)
     "notify Observer after" in{
       controller.resetGameBoard()
-      controller.createGameboard()
       controller.insertTile(0,4,'Y',2)
       controller.printGameBoard()
     }
