@@ -87,7 +87,7 @@ class GameBoardNetSpec extends AnyWordSpec with Matchers {
         gameBoardNet.player2 = Player("Josef")
       }
       "print the score" in{
-        gameBoardNet.printGameboard() startsWith("Adam")
+        gameBoardNet.printGameboard() startsWith "Adam"
       }
       "add another player " in{
         gameBoardNet.player3 =Player("Eva")
