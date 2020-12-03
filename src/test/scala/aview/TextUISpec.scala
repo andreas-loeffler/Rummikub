@@ -33,7 +33,11 @@ class TextUISpec extends AnyWordSpec with Matchers {
 
       }
       "return true " in{
-        txt.userInput("create") should be(true)
+        txt.userInput("createS") should be(true)
+        txt.userInput("createB") should be(true)
+        txt.userInput("player2 Adam Eva") should be(true)
+        txt.userInput("player3 Adam Eva Josef") should be(true)
+        txt.userInput("status") should be(true)
       }
 
     }

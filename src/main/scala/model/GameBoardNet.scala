@@ -23,6 +23,8 @@ case class GameBoardNet(gameboard: Vector[Vector[Field]]) {
     tiles
   }
 
+  fillTiles()
+
   def getXSize(): Int = gameboard.size
 
   def getYSize(): Int = gameboard(1).size
