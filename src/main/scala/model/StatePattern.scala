@@ -1,6 +1,6 @@
 package model
 
-object State {
+object StatePattern {
   def handle(x: Boolean): Unit = {
       x match {
         case true => offState

@@ -1,7 +1,7 @@
 
 import aview.TextUI
 import controller.Controller
-import model.{GameBoardNet, State}
+import model.{GameBoardNet, StatePattern}
 
 import scala.io.StdIn.readLine
 

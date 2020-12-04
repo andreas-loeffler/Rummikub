@@ -1,6 +1,6 @@
 package controller
 
-import model.{GameBoardNet, State, NumPlayersStrategy, FactoryStrategy}
+import model.{GameBoardNet, StatePattern, NumPlayersStrategy, FactoryStrategy}
 import util.Observable
 
 class Controller(var gameBoardNet: GameBoardNet) extends Observable {
@@ -27,7 +27,7 @@ class Controller(var gameBoardNet: GameBoardNet) extends Observable {
   }
 
   def handle(): Unit = {
-    val state = State
+    val state = StatePattern
     state.handle(gameBoardNet.isEmptyBoard())
   }
 

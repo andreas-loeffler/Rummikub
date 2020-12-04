@@ -6,6 +6,7 @@ case class GameBoardNet(gameboard: Vector[Vector[Field]]) {
 
   def this(xS: Int, yS: Int) = this(Vector.tabulate(xS, yS)((x, y) => Field(' ', 0)))
 
+
   var player1: Player = Player()
   var player2: Player = Player()
   var player3: Player = Player()
