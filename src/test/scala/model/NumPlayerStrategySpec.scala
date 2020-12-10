@@ -16,13 +16,13 @@ class NumPlayerStrategySpec extends AnyWordSpec with Matchers {
         NumPlayersStrategy.playerN("player2", Some("Josef"), Some("Dieter"), Some("Heinz"), gameBoardNet)
       }
       "have a second player " in {
-        gameBoardNet.player2.name should be("Dieter")
+        gameBoardNet.player2.name.get should be("Dieter")
       }
       "insert a third player " in {
         NumPlayersStrategy.playerN("player3", Some("Josef"), Some("Dieter"), Some("Heinz"), gameBoardNet)
       }
       "have a third player " in {
-        gameBoardNet.player3.name should be("Heinz")
+        gameBoardNet.player3.name.get should be("Heinz")
       }
     }
   }

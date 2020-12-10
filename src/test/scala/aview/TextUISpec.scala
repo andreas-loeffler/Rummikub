@@ -13,8 +13,8 @@ class TextUISpec extends AnyWordSpec with Matchers {
       "print the gameboard" in {
         txt.userInput("print") should be(true)
       }
-      "insert a tile" in {
-        txt.userInput("insert 0 0 Y 5") should be(true)
+      "set a tile" in {
+        txt.userInput("set 0 0 Y 5") should be(true)
       }
       "quit" in {
         txt.userInput("quit").toString startsWith "B"
