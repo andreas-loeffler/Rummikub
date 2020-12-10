@@ -35,12 +35,12 @@ case class GameBoardNet(gameboard: Vector[Vector[Field]]) {
     val sb = new StringBuilder
     sb.append("Available tiles: ").append(this.tiles).append("\n")
     sb.append("Scores:").append("\n")
-    if (this.player1.name != null && this.player2.name != null) {
-      sb.append(this.player1.name).append(": ").append(this.player1.tiles).append("\n")
-      sb.append(this.player2.name).append(": ").append(this.player2.tiles).append("\n")
+    if (this.player1.name.isDefined  && this.player2.name.isDefined) {
+      sb.append(this.player1.name.get).append(": ").append(this.player1.tiles).append("\n")
+      sb.append(this.player2.name.get).append(": ").append(this.player2.tiles).append("\n")
     }
-    if (this.player3.name != null)
-      sb.append(this.player3.name).append(": ").append(this.player3.tiles).append("\n")
+    if (this.player3.name.isDefined)
+      sb.append(this.player3.name.get).append(": ").append(this.player3.tiles).append("\n")
     for (x <- gameboard.indices) {
       for (y <- gameboard(1).indices) {
         sb.append(gameboard(x)(y).color).append(gameboard(x)(y).value).append("|")

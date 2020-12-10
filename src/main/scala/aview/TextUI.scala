@@ -18,12 +18,15 @@ class TextUI(controller: Controller) extends Observer {
         case "createS" => controller.smallGB()
         case "createB" => controller.bigGB()
         case "print" => print(controller.printGameBoard())
-        case "insert" => controller.insertTile(splitinput(1).toInt, splitinput(2).toInt, splitinput(3).charAt(0), splitinput(4).toInt)
-        case "quit" => println("Bye!")
+        case "set" => controller.set(splitinput(1).toInt, splitinput(2).toInt, splitinput(3).charAt(0), splitinput(4).toInt)
+        case "quit" => print("Bye!")
         case "reset" => controller.resetGameBoard()
         case "status" => controller.handle()
+        case "player1" => controller.onePlayerOpt(splitinput(1))
         case "player2" => controller.twoPlayerOpt(splitinput(1),splitinput(2))
         case "player3" => controller.threePlayerOpt(splitinput(1),splitinput(2),splitinput(3))
+        case "redo" => controller.redo
+        case "undo" => controller.undo
       }
     )
     match {

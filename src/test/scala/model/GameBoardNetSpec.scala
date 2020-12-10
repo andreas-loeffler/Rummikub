@@ -83,14 +83,14 @@ class GameBoardNetSpec extends AnyWordSpec with Matchers {
         gameBoardNet.getYSize() should be(14)
       }
       "add players in" in{
-        gameBoardNet.player1 = Player("Adam")
-        gameBoardNet.player2 = Player("Josef")
+        gameBoardNet.player1 = Player(Some("Adam"))
+        gameBoardNet.player2 = Player(Some("Josef"))
       }
       "print the score" in{
         gameBoardNet.printGameboard() startsWith "Adam"
       }
       "add another player " in{
-        gameBoardNet.player3 =Player("Eva")
+        gameBoardNet.player3 =Player(Some("Eva"))
       }
       "print the score again" in{
         gameBoardNet.printGameboard() startsWith("Adam")

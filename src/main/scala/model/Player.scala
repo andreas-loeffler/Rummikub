@@ -1,5 +1,5 @@
 package model
 
-case class Player(name: String = null, tiles:Int = 0) {
-  override def toString: String = name
+case class Player(name: Option[String] = None, tiles:Int = 0) {
+  def isEmpty:Boolean = name.isEmpty
 }
