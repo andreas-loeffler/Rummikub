@@ -13,6 +13,9 @@ class PlayerSpec extends AnyWordSpec with Matchers {
       "have a representation with a String" in {
         player.toString should be("testName")
       }
+      "not be empty " in{
+        player.isEmpty should be(false)
+      }
     }
   }
 }
