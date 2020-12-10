@@ -14,7 +14,7 @@ class TextUISpec extends AnyWordSpec with Matchers {
         txt.userInput("print") should be(true)
       }
       "insert a tile" in {
-        txt.userInput("insert 0 0 Y 5") should be(true)
+        txt.userInput("set 0 0 Y 5") should be(true)
       }
       "quit" in {
         txt.userInput("quit").toString startsWith "B"
@@ -32,9 +32,16 @@ class TextUISpec extends AnyWordSpec with Matchers {
         txt.userInput("insert a b Y 4").toString startsWith ("I")
 
       }
+      "call the undo mechanism" in {
+        txt.userInput("undo")
+      }
+      "call the redo mechanism " in {
+        txt.userInput("redo")
+      }
       "return true " in{
         txt.userInput("createS") should be(true)
         txt.userInput("createB") should be(true)
+        txt.userInput("player1 Heinz") should be(true)
         txt.userInput("player2 Adam Eva") should be(true)
         txt.userInput("player3 Adam Eva Josef") should be(true)
         txt.userInput("status") should be(true)

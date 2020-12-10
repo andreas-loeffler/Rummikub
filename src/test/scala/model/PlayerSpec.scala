@@ -8,13 +8,10 @@ class PlayerSpec extends AnyWordSpec with Matchers {
     "new " should {
       val player = Player(Some("testName"))
       "have a name " in {
-        player.name should be("testName")
+        player.name.get should be("testName")
       }
       "have a representation with a String" in {
         player.toString should be("testName")
-      }
-      "when unapplied" in {
-        Player.unapply(player).get should be("testName", 0)
       }
     }
   }
