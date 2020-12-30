@@ -16,10 +16,10 @@ class ControllerSpec extends AnyWordSpec with Matchers{
       override def update: Unit = updated = true
     }
 
-    controller.add(observer)
+    //controller.add(observer)
     "notify Observer after" in{
       controller.resetGameBoard()
-      controller.insertTile(0,4,'Y',2)
+      //controller.insertTile(0,4,'Y',2)
       controller.printGameBoard()
     }
   }

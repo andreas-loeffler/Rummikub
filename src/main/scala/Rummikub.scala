@@ -1,7 +1,9 @@
 
 import aview.TextUI
-import controller.Controller
+import aview.gui.SwingGui
+import controller.{Controller,FieldChanged}
 import model.{GameBoardNet, StatePattern}
+import aview.gui.SwingGui
 
 import scala.io.StdIn.readLine
 
@@ -11,7 +13,8 @@ object Rummikub {
 
   val controller = new Controller(new GameBoardNet())
   val textUI = new TextUI(controller)
-  controller.notifyObservers
+  val gui = new SwingGui(controller)
+  controller.publish(new FieldChanged)
 
   def main(args: Array[String]): Unit = {
     /*gameBoardNet = gameBoardNet.insertTile(0, 0, 'Y', 5) //valid

@@ -2,13 +2,15 @@ package aview
 
 import controller.Controller
 import util.Observer
+import controller._
 
+import scala.swing.Reactor
 import scala.util.{Failure, Success, Try}
 
 
-class TextUI(controller: Controller) extends Observer {
-  controller.add(this)
+class TextUI(controller: Controller) extends Reactor {
 
+  listenTo(controller)
 
   def userInput(input: String): Boolean = {
     val splitinput = input.split(" ")
@@ -35,6 +37,21 @@ class TextUI(controller: Controller) extends Observer {
     }
 
   }
+  reactions += {
+    case event: BigGameboard => printTui
+    case event: FieldChanged => printTui
+    case event: CandidatesChanged => printCandidates
+    case event: PlayersChanged => printTui
+  }
+  def printTui: Unit = {
+    println(controller.printGameBoard())
+    //println(GameStatus.message(controller.gameStatus))
+  }
+  def printCandidates: Unit = {
+    println("Candidates: ")
+    /*for (row <- 0 until size; col <- 0 until size) {
+      if (controller.isShowCandidates(row, col)) println("("+row+","+col+"):"+controller.available(row, col).toList.sorted)
+    */}
 
-  override def update: Unit = println(controller.printGameBoard())
+  //override def update: Unit = println(controller.printGameBoard())
 }

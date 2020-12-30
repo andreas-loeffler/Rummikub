@@ -6,6 +6,10 @@ case class GameBoardNet(gameboard: Vector[Vector[Field]]) {
 
   def this(xS: Int, yS: Int) = this(Vector.tabulate(xS, yS)((x, y) => Field(' ', 0)))
 
+  def getField(x:Int, y:Int): Field = {
+    gameboard(y)(x)
+  }
+
 
   var player1: Player = Player()
   var player2: Player = Player()
@@ -26,9 +30,9 @@ case class GameBoardNet(gameboard: Vector[Vector[Field]]) {
 
   fillTiles()
 
-  def getXSize(): Int = gameboard.size
+  def getXSize(): Int = gameboard(1).size
 
-  def getYSize(): Int = gameboard(1).size
+  def getYSize(): Int = gameboard.size
 
 
   def printGameboard(): String = {

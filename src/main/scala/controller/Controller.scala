@@ -2,27 +2,25 @@ package controller
 
 import model.{FactoryStrategy, GameBoardNet, NumPlayersStrategy, StatePattern}
 import util.{Observable, UndoManager}
+import scala.swing.Publisher
 
-class Controller(var gameBoardNet: GameBoardNet) extends Observable {
+class Controller(var gameBoardNet: GameBoardNet) extends Publisher {
 
   private val undoManager = new UndoManager
 
   def resetGameBoard(): Unit = {
-    for (x <- 0 until gameBoardNet.getXSize()) {
-      for (y <- 0 until gameBoardNet.getYSize()) {
+    for (x <- 0 until gameBoardNet.getYSize()) {
+      for (y <- 0 until gameBoardNet.getXSize()) {
         gameBoardNet = gameBoardNet.resetValues(x, y)
       }
 
 
     }
     gameBoardNet = new GameBoardNet()
-    notifyObservers
+    publish(new FieldChanged)
   }
 
-  def insertTile(row: Int, col: Int, color: Char, value: Int): Unit = {
-    gameBoardNet = gameBoardNet.insertTile(row, col, color, value)
-    notifyObservers
-  }
+
 
   def printGameBoard(): String = {
     gameBoardNet.printGameboard()
@@ -35,43 +33,50 @@ class Controller(var gameBoardNet: GameBoardNet) extends Observable {
 
   def onePlayerOpt(player1: String): Unit = {
     gameBoardNet = NumPlayersStrategy.playerN("player1", Some(player1), None, None, gameBoardNet)
+    publish(new PlayersChanged(player1,"available","available"))
   }
 
 
   def twoPlayerOpt(player1: String, player2: String): Unit = {
     gameBoardNet = NumPlayersStrategy.playerN("player2", Some(player1), Some(player2), None, gameBoardNet)
-    notifyObservers
+    publish(new PlayersChanged(player1,player2,"available"))
   }
 
   def threePlayerOpt(player1: String, player2: String, player3: String): Unit = {
     gameBoardNet = NumPlayersStrategy.playerN("player3", Some(player1), Some(player2), Some(player3), gameBoardNet)
-    notifyObservers
+    publish(new PlayersChanged(player1,player2,player3))
   }
 
 
   def bigGB(): Unit = {
     gameBoardNet = FactoryStrategy("big")
-    notifyObservers
+    publish(new BigGameboard(22))
   }
 
   def smallGB(): Unit = {
     gameBoardNet = FactoryStrategy("small")
-    notifyObservers
+    publish(new SmallGameboard(11))
   }
 
   def set(x: Int, y: Int, colorTile: Char, valueTile: Int): Unit = {
     undoManager.doStep(new SetCommand(x, y, colorTile, valueTile, this))
-    notifyObservers
+    publish(new FieldChanged)
   }
 
   def undo: Unit = {
     undoManager.undoStep
-    notifyObservers
+    publish(new FieldChanged)
   }
 
   def redo: Unit = {
     undoManager.redoStep
-    notifyObservers
+    publish(new FieldChanged)
   }
+
+  def gBxSize: Int = gameBoardNet.getXSize()
+  def gBySize: Int = gameBoardNet.getYSize()
+
+  def getFieldColor(x:Int,y:Int): Char = gameBoardNet.getField(x,y).color
+  def getFieldValue(x:Int,y:Int): Int = gameBoardNet.getField(x,y).value
 
 }
