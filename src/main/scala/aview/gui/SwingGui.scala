@@ -19,9 +19,45 @@ class SwingGui(controller: Controller) extends Frame {
   }
 
   var buttons = Array.ofDim[Button](controller.gameBoardNet.getXSize(), controller.gameBoardNet.getYSize())
-  var playerNames = Array.ofDim[String](3)
+  var label1,label2,label3 = new TextArea()
+  label1.text = controller.gameBoardNet.player1.name.toString
+  label2.text = controller.gameBoardNet.player2.name.toString
+  label3.text = controller.gameBoardNet.player3.name.toString
   val optsC = new ComboBox(List('G', 'R', 'B', 'S'))
   val optsV = new ComboBox(List(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14))
+  val doneBtn = new Button("Done"){
+    listenTo(mouse.clicks)
+    reactions += {
+      case e: ButtonClicked => controller.threePlayerOpt(txtplayer1.text,txtplayer2.text,txtplayer3.text)
+        label1.text = controller.gameBoardNet.player1.name.toString
+        label2.text = controller.gameBoardNet.player1.name.toString
+        label3.text = controller.gameBoardNet.player1.name.toString
+    }
+  }
+  var txtplayer1 = new TextField("Enter Player1 Name") {
+    listenTo(mouse.clicks)
+    reactions += {
+      case e: MouseClicked => text = ""}
+  }
+  var txtplayer2 = new TextField("Enter Player2 Name") {
+    listenTo(mouse.clicks)
+    reactions += {
+      case e: MouseClicked => text = ""}
+  }
+  var txtplayer3 = new TextField("Enter Player3 Name") {
+    listenTo(mouse.clicks)
+    reactions += {
+      case e: MouseClicked => text = ""}
+  }
+  val popupMenu = new PopupMenu {
+    contents += doneBtn
+    contents += txtplayer1
+    contents += txtplayer2
+    contents += txtplayer3
+
+  }
+  val numberPlayers = new ComboBox(List("1 Player", "2 Player", "3 Player"))
+
 
   def getTileColor(c: Char): Color = {
     var color = Color.white
@@ -59,6 +95,7 @@ class SwingGui(controller: Controller) extends Frame {
 
   listenTo(optsC.selection)
   listenTo(optsV.selection)
+  listenTo(numberPlayers.selection)
 
 
   def placeCombos = new GridPanel(2, 1) {
@@ -66,16 +103,27 @@ class SwingGui(controller: Controller) extends Frame {
     contents += optsV
   }
 
+  def placeMenu = new MenuBar {
+    contents += new Menu("Menu") {
+      mnemonic = Key.F
+      contents += new MenuItem(Action("Reset") {
+        controller.resetGameBoard()
+      })
+      contents += new MenuItem(Action("Quit") {
+        System.exit(0)
+      })
+    }
+  }
+
 
   def createPlayer = new GridPanel(4, 1) {
-    playerNames(0) = "available"
-    playerNames(1) = "available1"
-    playerNames(2) = "available"
-    val numberPlayers = new ComboBox(List("1 Player", "2 Player", "3 Player"))
+    reactions += {
+      case e: SelectionChanged => popupMenu.show(numberPlayers, 0, numberPlayers.bounds.height)
+    }
     contents += numberPlayers
-    contents += new Label(playerNames(0))
-    contents += new Label(playerNames(1))
-    contents += new Label(playerNames(2))
+    contents += label1
+    contents += label2
+    contents += label3
     listenTo(numberPlayers.selection)
   }
 
@@ -84,6 +132,7 @@ class SwingGui(controller: Controller) extends Frame {
     add(createGameboard, BorderPanel.Position.Center)
     add(createPlayer, BorderPanel.Position.East)
     add(placeCombos, BorderPanel.Position.West)
+    add(placeMenu, BorderPanel.Position.North)
   }
 
   visible = true
@@ -104,9 +153,9 @@ class SwingGui(controller: Controller) extends Frame {
   }
 
   def redraw(newPlayer1: String, newPlayer2: String, newPlayer3: String) = {
-    playerNames(0) = newPlayer1
-    playerNames(1) = newPlayer2
-    playerNames(2) = newPlayer3
+    label1.text = newPlayer1
+    label2.text = newPlayer2
+    label3.text = newPlayer3
 
     for {
       x <- 0 until controller.gameBoardNet.getXSize()
