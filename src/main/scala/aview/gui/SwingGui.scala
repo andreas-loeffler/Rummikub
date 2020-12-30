@@ -69,7 +69,7 @@ class SwingGui(controller: Controller) extends Frame {
 
   def createPlayer = new GridPanel(4, 1) {
     playerNames(0) = "available"
-    playerNames(1) = "available"
+    playerNames(1) = "available1"
     playerNames(2) = "available"
     val numberPlayers = new ComboBox(List("1 Player", "2 Player", "3 Player"))
     contents += numberPlayers
