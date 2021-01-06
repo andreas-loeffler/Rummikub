@@ -1,5 +1,7 @@
 package model
 
+import model.StrategyComponents.strategyBaseImpl.StatePattern
+import model.gameBoardComponents.gameBoardBaseImpl.GameBoardNet
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 

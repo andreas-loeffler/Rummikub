@@ -1,5 +1,6 @@
 package model
 
+import model.StrategyComponents.strategyBaseImpl.FactoryStrategy
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 

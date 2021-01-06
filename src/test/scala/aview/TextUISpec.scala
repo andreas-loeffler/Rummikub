@@ -1,7 +1,7 @@
 package aview
 
-import controller.Controller
-import model.GameBoardNet
+import controller.controllerComponents.controllerBaseImpl.Controller
+import model.gameBoardComponents.gameBoardBaseImpl.GameBoardNet
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 

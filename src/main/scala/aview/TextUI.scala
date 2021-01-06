@@ -1,8 +1,8 @@
 package aview
 
-import controller.Controller
 import util.Observer
 import controller._
+import controller.controllerComponents.controllerBaseImpl.{BigGameboard, CandidatesChanged, Controller, FieldChanged, PlayersChanged}
 
 import scala.swing.Reactor
 import scala.util.{Failure, Success, Try}

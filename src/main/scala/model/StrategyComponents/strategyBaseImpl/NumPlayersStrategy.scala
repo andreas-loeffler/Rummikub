@@ -1,11 +1,15 @@
-package model
+package model.StrategyComponents.strategyBaseImpl
 
-object NumPlayersStrategy {
+import model.StrategyComponents.NumPlayersStrategyInterface
+import model.gameBoardComponents.gameBoardBaseImpl.GameBoardNet
+import model.playerComponents.playerBaseImpl.Player
+
+object NumPlayersStrategy extends NumPlayersStrategyInterface{
 
   def playerN(x: String, name1: Option[String], name2: Option[String], name3: Option[String], gameBoardNet: GameBoardNet): GameBoardNet = x match {
     case "player1" => player1(name1.get, gameBoardNet)
-    case "player2" => player2(name1.get,name2.get,gameBoardNet)
-    case "player3" => player3(name1.get,name2.get,name3.get,gameBoardNet)
+    case "player2" => player2(name1.get, name2.get, gameBoardNet)
+    case "player3" => player3(name1.get, name2.get, name3.get, gameBoardNet)
   }
 
 

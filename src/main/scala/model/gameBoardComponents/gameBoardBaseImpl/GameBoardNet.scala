@@ -1,12 +1,15 @@
-package model
+package model.gameBoardComponents.gameBoardBaseImpl
 
-case class GameBoardNet(gameboard: Vector[Vector[Field]]) {
+import model.gameBoardComponents.GameBoardInterface
+import model.playerComponents.playerBaseImpl.Player
+
+case class GameBoardNet(gameboard: Vector[Vector[Field]]) extends GameBoardInterface{
 
   def this() = this(Vector.tabulate(11, 14)((x, y) => Field(' ', 0)))
 
   def this(xS: Int, yS: Int) = this(Vector.tabulate(xS, yS)((x, y) => Field(' ', 0)))
 
-  def getField(x:Int, y:Int): Field = {
+  def getField(x: Int, y: Int): Field = {
     gameboard(y)(x)
   }
 
@@ -39,7 +42,7 @@ case class GameBoardNet(gameboard: Vector[Vector[Field]]) {
     val sb = new StringBuilder
     sb.append("Available tiles: ").append(this.tiles).append("\n")
     sb.append("Scores:").append("\n")
-    if (this.player1.name.isDefined  && this.player2.name.isDefined) {
+    if (this.player1.name.isDefined && this.player2.name.isDefined) {
       sb.append(this.player1.name.get).append(": ").append(this.player1.tiles).append("\n")
       sb.append(this.player2.name.get).append(": ").append(this.player2.tiles).append("\n")
     }

@@ -1,9 +1,11 @@
 
 import aview.TextUI
 import aview.gui.SwingGui
-import controller.{Controller,FieldChanged}
-import model.{GameBoardNet, StatePattern}
+import controller.FieldChanged
 import aview.gui.SwingGui
+import controller.controllerComponents.controllerBaseImpl.{Controller, FieldChanged}
+import model.StrategyComponents.strategyBaseImpl.StatePattern
+import model.gameBoardComponents.gameBoardBaseImpl.GameBoardNet
 
 import scala.io.StdIn.readLine
 

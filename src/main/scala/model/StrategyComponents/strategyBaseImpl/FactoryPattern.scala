@@ -1,10 +1,10 @@
-package model
+package model.StrategyComponents.strategyBaseImpl
 
-trait FactoryStrategy {
-  def setSize(): GameBoardNet
-}
+import model.StrategyComponents.FactoryStrategyInterface
+import model.gameBoardComponents.gameBoardBaseImpl.GameBoardNet
 
-private class BigGameBoardNetStrategy extends FactoryStrategy {
+
+private class BigGameBoardNetStrategy extends FactoryStrategyInterface {
   override def setSize(): GameBoardNet = {
     val gameBoardNet = new GameBoardNet(xS = 22, yS = 28)
     gameBoardNet.fillTiles()
@@ -12,7 +12,7 @@ private class BigGameBoardNetStrategy extends FactoryStrategy {
   }
 }
 
-private class SmallGameBoardNetStrategy extends FactoryStrategy {
+private class SmallGameBoardNetStrategy extends FactoryStrategyInterface {
   override def setSize(): GameBoardNet = {
     val gameBoardNet = new GameBoardNet(xS = 11, yS = 14)
     gameBoardNet.fillTiles()

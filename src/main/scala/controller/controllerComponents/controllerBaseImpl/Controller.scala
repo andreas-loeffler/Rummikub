@@ -1,10 +1,13 @@
-package controller
+package controller.controllerComponents.controllerBaseImpl
 
-import model.{FactoryStrategy, GameBoardNet, NumPlayersStrategy, StatePattern}
-import util.{Observable, UndoManager}
-import scala.swing.Publisher
+import controller.controllerComponents.ControllerInterface
+import model.gameBoardComponents.gameBoardBaseImpl.GameBoardNet
+import model.StrategyComponents.strategyBaseImpl.StatePattern
+import model.StrategyComponents.strategyBaseImpl.{FactoryStrategy, NumPlayersStrategy, StatePattern}
+import util.UndoManager
 
-class Controller(var gameBoardNet: GameBoardNet) extends Publisher {
+
+class Controller(var gameBoardNet: GameBoardNet) extends ControllerInterface {
 
   private val undoManager = new UndoManager
 
@@ -21,7 +24,6 @@ class Controller(var gameBoardNet: GameBoardNet) extends Publisher {
   }
 
 
-
   def printGameBoard(): String = {
     gameBoardNet.printGameboard()
   }
@@ -33,18 +35,18 @@ class Controller(var gameBoardNet: GameBoardNet) extends Publisher {
 
   def onePlayerOpt(player1: String): Unit = {
     gameBoardNet = NumPlayersStrategy.playerN("player1", Some(player1), None, None, gameBoardNet)
-    publish(new PlayersChanged(player1,"available","available"))
+    publish(new PlayersChanged(player1, "available", "available"))
   }
 
 
   def twoPlayerOpt(player1: String, player2: String): Unit = {
     gameBoardNet = NumPlayersStrategy.playerN("player2", Some(player1), Some(player2), None, gameBoardNet)
-    publish(new PlayersChanged(player1,player2,"available"))
+    publish(new PlayersChanged(player1, player2, "available"))
   }
 
   def threePlayerOpt(player1: String, player2: String, player3: String): Unit = {
     gameBoardNet = NumPlayersStrategy.playerN("player3", Some(player1), Some(player2), Some(player3), gameBoardNet)
-    publish(new PlayersChanged(player1,player2,player3))
+    publish(new PlayersChanged(player1, player2, player3))
   }
 
 
@@ -74,9 +76,11 @@ class Controller(var gameBoardNet: GameBoardNet) extends Publisher {
   }
 
   def gBxSize: Int = gameBoardNet.getXSize()
+
   def gBySize: Int = gameBoardNet.getYSize()
 
-  def getFieldColor(x:Int,y:Int): Char = gameBoardNet.getField(x,y).color
-  def getFieldValue(x:Int,y:Int): Int = gameBoardNet.getField(x,y).value
+  def getFieldColor(x: Int, y: Int): Char = gameBoardNet.getField(x, y).color
+
+  def getFieldValue(x: Int, y: Int): Int = gameBoardNet.getField(x, y).value
 
 }

@@ -1,6 +1,5 @@
-package controller
+package controller.controllerComponents.controllerBaseImpl
 
-import model.Field
 import util.Command
 
 class SetCommand(x: Int, y: Int, colorTile: Char, valueTile: Int, controller: Controller) extends Command {

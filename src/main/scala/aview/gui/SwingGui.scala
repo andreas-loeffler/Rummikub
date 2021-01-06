@@ -1,6 +1,7 @@
 package aview.gui
 
-import controller.{Controller, _}
+import controller._
+import controller.controllerComponents.controllerBaseImpl.{BigGameboard, Controller, FieldChanged, PlayersChanged, SmallGameboard}
 
 import java.awt.Color
 import scala.swing._
@@ -29,9 +30,9 @@ class SwingGui(controller: Controller) extends Frame {
     listenTo(mouse.clicks)
     reactions += {
       case e: ButtonClicked => controller.threePlayerOpt(txtplayer1.text,txtplayer2.text,txtplayer3.text)
-        label1.text = controller.gameBoardNet.player1.name.toString
-        label2.text = controller.gameBoardNet.player1.name.toString
-        label3.text = controller.gameBoardNet.player1.name.toString
+        label1.text = controller.gameBoardNet.player1.name.get
+        label2.text = controller.gameBoardNet.player2.name.get
+        label3.text = controller.gameBoardNet.player3.name.get
     }
   }
   var txtplayer1 = new TextField("Enter Player1 Name") {
