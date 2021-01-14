@@ -103,7 +103,7 @@ class SwingGui(controller: ControllerInterface) extends Frame {
     contents += optsV
   }
 
-  def placeMenu = new MenuBar {
+  def placeMenu: MenuBar = new MenuBar {
     contents += new Menu("Menu") {
       mnemonic = Key.F
       contents += new MenuItem(Action("Reset") {
