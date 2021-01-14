@@ -3,8 +3,6 @@ package rummikub.model.gameBoardComponents.gameBoardBaseImpl
 import rummikub.model.gameBoardComponents.GameBoardInterface
 import rummikub.model.playerComponents.playerBaseImpl.Player
 
-import scala.util.Try
-
 case class GameBoardNet(gameboard: Vector[Vector[Field]]) extends GameBoardInterface {
 
   def this() = this(Vector.tabulate(11, 14)((x, y) => Field(' ', 0)))
