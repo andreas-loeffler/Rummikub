@@ -79,10 +79,10 @@ class GameBoardNetSpec extends AnyWordSpec with Matchers {
         gameBoardNet.isEmptyBoard() should be (true)
       }
       "return x size" in{
-        gameBoardNet.getXSize() should be(11)
+        gameBoardNet.getXSize() should be(14)
       }
       "return y size" in{
-        gameBoardNet.getYSize() should be(14)
+        gameBoardNet.getYSize() should be(11)
       }
       "add players in" in{
         gameBoardNet.player1 = Player(Some("Adam"))
@@ -99,6 +99,14 @@ class GameBoardNetSpec extends AnyWordSpec with Matchers {
       }
       "insert a tile at wrong posi " in {
         gameBoardNet.insertTile(12,15,'Y',6).toString startsWith(" ")
+      }
+      "return the name of players" in{
+        gameBoardNet.getp1().toString startsWith("A")
+        gameBoardNet.getp2().toString startsWith("J")
+        gameBoardNet.getp3().toString startsWith("E")
+      }
+      "return a field " in{
+        gameBoardNet.getField(2,2).toString should be(" 0")
       }
     }
   }
