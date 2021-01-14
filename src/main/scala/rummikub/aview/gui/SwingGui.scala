@@ -74,15 +74,15 @@ class SwingGui(controller: ControllerInterface) extends Frame {
   }
 
   def createGameboard: GridPanel = new GridPanel(11, 14) {
-    var stanColor: Color = Color.white
     for {indexY <- 0 until controller.gBySize} {
       for {index <- 0 until controller.gBxSize} {
-        var temp = new Button("|") {
+        var temp = new Button(index + "|" + indexY) {
           reactions += {
             case e: ButtonClicked =>
               controller.set(indexY, index, optsC.selection.item, optsV.selection.item)
+              if (controller.getFieldColor(index, indexY).equals(' ')) background = Color.white
+              else background = getTileColor(controller.getFieldColor(index, indexY))
           }
-          if (controller.getFieldColor(index, indexY).equals(' ')) background = Color.white else background = getTileColor(controller.getFieldColor(index, indexY))
         }
         listenTo(temp.mouse.clicks)
 
