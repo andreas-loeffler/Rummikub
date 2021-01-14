@@ -2,14 +2,14 @@ package rummikub.controller.controllerComponents.controllerBaseImpl
 
 import com.google.inject.{Guice, Inject, Injector}
 import rummikub.RummikubModule
-import rummikub.controller.controllerComponents.ControllerInterface
+import rummikub.controller.controllerComponents.{BigGameboard, ControllerInterface, FieldChanged, PlayersChanged, SmallGameboard}
 import rummikub.model.gameBoardComponents.gameBoardBaseImpl.GameBoardNet
 import rummikub.model.StrategyComponents.strategyBaseImpl.{FactoryStrategy, NumPlayersStrategy, StatePattern}
 import rummikub.model.gameBoardComponents.GameBoardInterface
 import rummikub.util.UndoManager
 
 
-class Controller @Inject()(var gameBoardNet: GameBoardInterface) extends ControllerInterface{
+class Controller @Inject()(var gameBoardNet: GameBoardInterface) extends ControllerInterface {
 
   private val undoManager = new UndoManager
   val injector: Injector = Guice.createInjector(new RummikubModule)
@@ -86,8 +86,10 @@ class Controller @Inject()(var gameBoardNet: GameBoardInterface) extends Control
 
   def getFieldValue(x: Int, y: Int): Int = gameBoardNet.getField(x, y).value
 
-  def getplayer1Name: Option[String] = gameBoardNet.getPlayername(1)
-  def getplayer2Name: Option[String] = gameBoardNet.getPlayername(2)
-  def getplayer3Name: Option[String] = gameBoardNet.getPlayername(3)
+  def getplayer1Name: Option[String] = gameBoardNet.getp1()
+
+  def getplayer2Name: Option[String] = gameBoardNet.getp2()
+
+  def getplayer3Name: Option[String] = gameBoardNet.getp3()
 
 }

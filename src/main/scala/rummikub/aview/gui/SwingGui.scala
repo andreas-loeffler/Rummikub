@@ -1,7 +1,6 @@
 package rummikub.aview.gui
 
 import rummikub.controller.controllerComponents._
-import rummikub.controller.controllerComponents.controllerBaseImpl.{BigGameboard, FieldChanged, PlayersChanged, SmallGameboard}
 
 import java.awt.Color
 import scala.swing._
@@ -14,19 +13,19 @@ class SwingGui(controller: ControllerInterface) extends Frame {
   listenTo(controller)
   title = "Rummikub"
 
-  def mainFrame = new BorderPanel {
+  def mainFrame: BorderPanel = new BorderPanel {
     visible = true
     preferredSize = new Dimension(1024, 768)
   }
 
-  var buttons = Array.ofDim[Button](controller.gBxSize, controller.gBySize)
+  var buttons: Array[Array[Button]] = Array.ofDim[Button](controller.gBxSize, controller.gBySize)
   var label1,label2,label3 = new TextArea()
   label1.text = controller.getplayer1Name.toString
   label2.text = controller.getplayer2Name.toString
   label3.text = controller.getplayer3Name.toString
   val optsC = new ComboBox(List('G', 'R', 'B', 'S'))
   val optsV = new ComboBox(List(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14))
-  val doneBtn = new Button("Done"){
+  val doneBtn: Button = new Button("Done"){
     listenTo(mouse.clicks)
     reactions += {
       case e: ButtonClicked => controller.threePlayerOpt(txtplayer1.text,txtplayer2.text,txtplayer3.text)
@@ -50,7 +49,7 @@ class SwingGui(controller: ControllerInterface) extends Frame {
     reactions += {
       case e: MouseClicked => text = ""}
   }
-  val popupMenu = new PopupMenu {
+  val popupMenu: PopupMenu = new PopupMenu {
     contents += doneBtn
     contents += txtplayer1
     contents += txtplayer2
@@ -74,11 +73,11 @@ class SwingGui(controller: ControllerInterface) extends Frame {
     color
   }
 
-  def createGameboard = new GridPanel(11, 14) {
-    var stanColor = Color.white
+  def createGameboard: GridPanel = new GridPanel(11, 14) {
+    var stanColor: Color = Color.white
     for {indexY <- 0 until controller.gBySize} {
       for {index <- 0 until controller.gBxSize} {
-        var temp = new Button(index + "|" + indexY) {
+        var temp = new Button("|") {
           reactions += {
             case e: ButtonClicked =>
               controller.set(indexY, index, optsC.selection.item, optsV.selection.item)
@@ -112,6 +111,18 @@ class SwingGui(controller: ControllerInterface) extends Frame {
       })
       contents += new MenuItem(Action("Quit") {
         System.exit(0)
+      })
+      contents += new MenuItem(Action("Create Big") {
+        controller.bigGB
+      })
+      contents += new MenuItem(Action("Create Small") {
+        controller.smallGB
+      })
+      contents += new MenuItem(Action("Undo") {
+        controller.undo
+      })
+      contents += new MenuItem(Action("Redo") {
+        controller.redo
       })
     }
   }

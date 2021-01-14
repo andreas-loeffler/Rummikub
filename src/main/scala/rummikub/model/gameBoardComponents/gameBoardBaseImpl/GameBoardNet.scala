@@ -157,15 +157,9 @@ case class GameBoardNet(gameboard: Vector[Vector[Field]]) extends GameBoardInter
     insertedGameboard
   }
 
-  override def getPlayername(num: Int): Option[String] = {
-    val name = "player" + num.toString
-    name
-    match {
-      case "player1 " => player1.name
-      case "player2 " => player2.name
-      case "player3 " => player3.name
-    }
-  }
+  override def getp1():Option[String] = player1.name
+  override def getp2():Option[String] = player2.name
+  override def getp3():Option[String] = player3.name
 
-  override def returnGB(): GameBoardNet = gameboard
+  override def returnGB(): GameBoardNet = this
 }

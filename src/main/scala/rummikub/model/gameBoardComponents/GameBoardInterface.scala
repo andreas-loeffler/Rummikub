@@ -25,6 +25,8 @@ trait GameBoardInterface {
   def isColorValid(x: Int, y: Int): Boolean
   def allValid(x: Int, y: Int): Boolean
   def insertTile(x: Int, y: Int, c: Char, v: Int): GameBoardNet
-  def getPlayername(num: Int): Option[String]
   def returnGB: GameBoardNet
+  def getp1():Option[String]
+  def getp2():Option[String]
+  def getp3():Option[String]
 }
