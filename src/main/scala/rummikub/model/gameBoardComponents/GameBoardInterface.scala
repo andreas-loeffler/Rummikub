@@ -29,4 +29,5 @@ trait GameBoardInterface {
   def getp1():Option[String]
   def getp2():Option[String]
   def getp3():Option[String]
+  def getAllPlayer(): String
 }

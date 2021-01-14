@@ -160,4 +160,9 @@ case class GameBoardNet(gameboard: Vector[Vector[Field]]) extends GameBoardInter
   override def getp3():Option[String] = player3.name
 
   override def returnGB(): GameBoardNet = this
+
+  override def getAllPlayer(): String = {
+    val names = getp1().get + "," + getp2().get + "," + getp3().get
+    names
+  }
 }
