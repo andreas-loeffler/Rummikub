@@ -25,6 +25,7 @@ class TextUI(controller: ControllerInterface) extends Reactor {
         case "player3" => controller.threePlayerOpt(splitinput(1), splitinput(2), splitinput(3))
         case "redo" => controller.redo
         case "undo" => controller.undo
+        case "save" => controller.saveXml
       }
     )
     match {

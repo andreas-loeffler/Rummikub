@@ -92,4 +92,29 @@ class Controller @Inject()(var gameBoardNet: GameBoardInterface) extends Control
 
   def getplayer3Name: Option[String] = gameBoardNet.getp3()
 
+  def saveXml: Unit = {
+    import rummikub.model.fileIOComponent.fileIXml.FileIo
+    val fIO = new FileIo
+    fIO.save(gameBoardNet)
+  }
+
+  def loadXml: Unit = {
+    import rummikub.model.fileIOComponent.fileIXml.FileIo
+    val fIO = new FileIo
+    gameBoardNet = fIO.load
+    publish(new FieldChanged)
+  }
+
+  def saveJson: Unit = {
+    import rummikub.model.fileIOComponent.fileIOJson.FileIO
+    val fIO = new FileIO
+    fIO.save(gameBoardNet)
+  }
+
+  def loadJson: Unit = {
+    import rummikub.model.fileIOComponent.fileIOJson.FileIO
+    val fIO = new FileIO
+    gameBoardNet = fIO.load
+  }
+
 }

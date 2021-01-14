@@ -124,6 +124,18 @@ class SwingGui(controller: ControllerInterface) extends Frame {
       contents += new MenuItem(Action("Redo") {
         controller.redo
       })
+      contents += new MenuItem(Action("SaveXml") {
+        controller.saveXml
+      })
+      contents += new MenuItem(Action("LoadXml") {
+        controller.loadXml
+      })
+      contents += new MenuItem(Action("SaveJson") {
+        controller.saveJson
+      })
+      contents += new MenuItem(Action("LoadJson") {
+        controller.loadJson
+      })
     }
   }
 

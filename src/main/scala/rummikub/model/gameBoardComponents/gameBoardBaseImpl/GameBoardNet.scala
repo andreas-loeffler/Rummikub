@@ -13,11 +13,23 @@ case class GameBoardNet(gameboard: Vector[Vector[Field]]) extends GameBoardInter
     gameboard(y)(x)
   }
 
-
   var player1: Player = Player()
   var player2: Player = Player()
   var player3: Player = Player()
   var tiles: List[String] = List()
+
+  def renamePlayer1(name:Option[String]):Unit = {
+    val player = new Player(name)
+    player1 = player
+  }
+  def renamePlayer2(name:Option[String]):Unit = {
+    val player = new Player(name)
+    player2 = player
+  }
+  def renamePlayer3(name:Option[String]):Unit = {
+    val player = new Player(name)
+    player3 = player
+  }
 
   def fillTiles(): List[String] = {
     for (x <- 1 until 15) {
@@ -153,6 +165,17 @@ case class GameBoardNet(gameboard: Vector[Vector[Field]]) extends GameBoardInter
       return insertedWGameboard
 
     insertedGameboard
+  }
+
+  override def insertTileRaw(x: Int, y: Int, c: Char, v: Int): GameBoardNet = {
+    if (x > gameboard.size && y > gameboard(1).size) {
+      println("Invalid position!")
+      val gameBoardNetException = copy(gameboard)
+      return gameBoardNetException
+    }
+    val insertedGameboard = copy(gameboard.updated(x, gameboard(x).updated(y, Field(c, v))))
+
+    return insertedGameboard
   }
 
   override def getp1():Option[String] = player1.name

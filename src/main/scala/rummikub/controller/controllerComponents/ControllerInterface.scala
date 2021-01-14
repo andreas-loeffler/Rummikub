@@ -6,6 +6,14 @@ import scala.swing.Publisher
 
 trait ControllerInterface extends Observable with Publisher {
 
+  def saveXml: Unit
+
+  def loadXml: Unit
+
+  def saveJson: Unit
+
+  def loadJson: Unit
+
   def resetGameBoard: Unit
 
   def printGameBoard: String

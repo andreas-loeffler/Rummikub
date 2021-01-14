@@ -8,14 +8,32 @@ import rummikub.model.fileIOComponent.FileIOInterface
 import rummikub.model.gameBoardComponents.GameBoardInterface
 import rummikub.RummikubModule
 import play.api.libs.json._
+import rummikub.model.gameBoardComponents.gameBoardBaseImpl.GameBoardNet
 
 import java.awt.Color
 import java.io._
 import scala.io.Source
 
 
-class FileIO extends FileIOInterface{
+class FileIO extends FileIOInterface {
+
   override def load: GameBoardInterface = {
+    val fileIO = Source.fromFile("gameboard.json").getLines().mkString
+    var gameBoard: GameBoardInterface = new GameBoardNet
+    val injector = Guice.createInjector(new RummikubModule)
+    gameBoard= injector.instance[GameBoardInterface](Names.named("normal"))
+    val json = Json.parse(fileIO)
+    gameBoard.renamePlayer1(Some((json \ "game" \ "player1").as[String]))
+    gameBoard.renamePlayer2(Some((json \ "game" \ "player2").as[String]))
+    gameBoard.renamePlayer3(Some((json \ "game" \ "player3").as[String]))
+    for (index <- 0 until 14) {
+      val x = (json \\ "xVal") (index).as[Int]
+      val y = (json \\ "yVal") (index).as[Int]
+      val color = (json \\ "color") (index).toString()
+      val value = (json \\ "value") (index).as[Int]
+      gameBoard = gameBoard.insertTileRaw(x, y, color.charAt(0), value)
+    }
+    gameBoard
 
   }
 
@@ -29,16 +47,19 @@ class FileIO extends FileIOInterface{
     Json.obj(
       "game" -> Json.obj(
         "size" -> JsNumber(game.getXSize()),
-        "player" -> Json.toJson(game.getAllPlayer()),
+        "player1" -> Json.toJson(game.getp1().toString),
+        "player2" -> Json.toJson(game.getp2().toString),
+        "player3" -> Json.toJson(game.getp3().toString),
         "fields" -> Json.toJson(
-          for{
-              xVal <- 0 until game.getXSize();
-              yVal <- 0 until game.getYSize()
+          for {
+            xVal <- 0 until game.getXSize();
+            yVal <- 0 until game.getYSize()
           } yield {
             Json.obj(
               "xVal" -> xVal,
               "yVal" -> yVal,
-              "field"-> Json.toJson(game.getField(xVal,yVal))
+              "color" -> Json.toJson(game.getField(xVal, yVal).color.toString),
+              "value" -> Json.toJson(game.getField(xVal, yVal).value)
             )
           }
         )
