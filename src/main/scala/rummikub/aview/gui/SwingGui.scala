@@ -73,22 +73,26 @@ class SwingGui(controller: ControllerInterface) extends Frame {
     color
   }
 
+  def insert(x:Int,y:Int,c:Char,v:Int): Unit = {
+
+  }
+
+
   def createGameboard: GridPanel = new GridPanel(11, 14) {
     for {indexY <- 0 until controller.gBySize} {
       for {index <- 0 until controller.gBxSize} {
-        var temp = new Button(index + "|" + indexY) {
+        var temp = new Button(controller.getFieldValue(index,indexY).toString + controller.getFieldColor(index,indexY).toString) {
           reactions += {
             case e: ButtonClicked =>
+              text = optsC.selection.item + optsV.selection.item.toString
               controller.set(indexY, index, optsC.selection.item, optsV.selection.item)
-              if (controller.getFieldColor(index, indexY).equals(' ')) background = Color.white
-              else background = getTileColor(controller.getFieldColor(index, indexY))
+              background = getTileColor(controller.getFieldColor(index, indexY))
           }
         }
         listenTo(temp.mouse.clicks)
 
         contents += temp
         buttons(index)(indexY) = temp
-
       }
     }
   }
@@ -108,6 +112,8 @@ class SwingGui(controller: ControllerInterface) extends Frame {
       mnemonic = Key.F
       contents += new MenuItem(Action("Reset") {
         controller.resetGameBoard
+        close()
+        new SwingGui(controller)
       })
       contents += new MenuItem(Action("Quit") {
         System.exit(0)

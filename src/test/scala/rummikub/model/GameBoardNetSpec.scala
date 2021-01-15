@@ -108,6 +108,12 @@ class GameBoardNetSpec extends AnyWordSpec with Matchers {
       "return a field " in{
         gameBoardNet.getField(2,2).toString should be(" 0")
       }
+      "insert a tile raw " in{
+        gameBoardNet.insertTileRaw(0,0,'S',3)
+      }
+      "print a error if wrong raw insert " in{
+        gameBoardNet.insertTileRaw(122,1999,'G',3).toString startsWith("I")
+      }
     }
   }
 }

@@ -26,12 +26,12 @@ class FileIO extends FileIOInterface {
     gameBoard.renamePlayer1(Some((json \ "game" \ "player1").as[String]))
     gameBoard.renamePlayer2(Some((json \ "game" \ "player2").as[String]))
     gameBoard.renamePlayer3(Some((json \ "game" \ "player3").as[String]))
-    for (index <- 0 until 14) {
-      val x = (json \\ "xVal") (index).as[Int]
-      val y = (json \\ "yVal") (index).as[Int]
+    for (index <- 0 until 14*11) {
+      val x = (json \\ "yVal") (index).as[Int]
+      val y = (json \\ "xVal") (index).as[Int]
       val color = (json \\ "color") (index).toString()
       val value = (json \\ "value") (index).as[Int]
-      gameBoard = gameBoard.insertTileRaw(x, y, color.charAt(0), value)
+      gameBoard = gameBoard.insertTileRaw(x, y, color.charAt(1), value)
     }
     gameBoard
 
@@ -41,6 +41,8 @@ class FileIO extends FileIOInterface {
     import java.io._
     val printWriter = new PrintWriter(new File("gameboard.json"))
     printWriter.write(Json.prettyPrint(gameboardToJson(gameboard)))
+    printWriter.close()
+    print("Done")
   }
 
   def gameboardToJson(game: GameBoardInterface) = {

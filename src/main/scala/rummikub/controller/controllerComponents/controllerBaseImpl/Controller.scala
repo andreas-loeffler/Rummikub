@@ -115,6 +115,7 @@ class Controller @Inject()(var gameBoardNet: GameBoardInterface) extends Control
     import rummikub.model.fileIOComponent.fileIOJson.FileIO
     val fIO = new FileIO
     gameBoardNet = fIO.load
+    publish(new FieldChanged)
   }
 
 }

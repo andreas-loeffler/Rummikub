@@ -59,13 +59,13 @@ class FileIo extends FileIOInterface {
       {interface.getField(xVal, yVal).value}
     </field>
 
-      <player1 p1={interface.getp1()}>
+      <player1 p1={interface.getp1.toString}>
     </player1>
 
-      <player2 p2={interface.getp2()}>
+      <player2 p2={interface.getp2.toString}>
     </player2>
 
-    <player3 p3={interface.getp3()}>
+    <player3 p3={interface.getp3.toString}>
     </player3>
   }
 }
