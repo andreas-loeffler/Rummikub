@@ -19,9 +19,8 @@ class FileIO extends FileIOInterface {
 
   override def load: GameBoardInterface = {
     val fileIO = Source.fromFile("gameboard.json").getLines().mkString
-    var gameBoard: GameBoardInterface = new GameBoardNet
     val injector = Guice.createInjector(new RummikubModule)
-    gameBoard= injector.instance[GameBoardInterface](Names.named("normal"))
+    var gameBoard: GameBoardInterface = injector.instance[GameBoardInterface](Names.named("normal"))
     val json = Json.parse(fileIO)
     gameBoard.renamePlayer1(Some((json \ "game" \ "player1").as[String]))
     gameBoard.renamePlayer2(Some((json \ "game" \ "player2").as[String]))

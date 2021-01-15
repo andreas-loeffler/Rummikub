@@ -17,9 +17,8 @@ class FileIo extends FileIOInterface {
 
   override def load: GameBoardInterface = {
     val file = scala.xml.XML.loadFile("save.xml")
-    var game: GameBoardInterface = new GameBoardNet
     val injector = Guice.createInjector(new RummikubModule)
-    game = injector.instance[GameBoardInterface](Names.named("normal"))
+    var game: GameBoardInterface = injector.instance[GameBoardInterface](Names.named("normal"))
     game.renamePlayer1(Some((file \\ "player1").toString))
     game.renamePlayer2(Some((file \\ "player2").toString))
     game.renamePlayer3(Some((file \\ "player3").toString))
