@@ -21,6 +21,7 @@ class RummikubModule extends AbstractModule with ScalaModule{
     bind[GameBoardInterface].annotatedWithName("big").toInstance(new GameBoardNet(22,28))
     bind[GameBoardInterface].annotatedWithName("normal").toInstance(new GameBoardNet(11,14))
     bind[FileIOInterface].to[rummikub.model.fileIOComponent.fileIOJson.FileIO]
+    //bind[FileIOInterface].to[rummikub.model.fileIOComponent.fileIXml.FileIo]
 
   }
 
