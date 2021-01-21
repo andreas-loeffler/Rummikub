@@ -1,6 +1,6 @@
-package rummikub.model.gameBoardComponents
+package Rummikub.model.gameBoardComponents
 
-import rummikub.model.gameBoardComponents.gameBoardBaseImpl.{Field, GameBoardNet}
+import Rummikub.model.gameBoardComponents.gameBoardBaseImpl.{Field, GameBoardNet}
 
 trait GameBoardInterface {
 

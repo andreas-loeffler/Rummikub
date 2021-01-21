@@ -1,4 +1,4 @@
-package rummikub.model.StrategyComponents
+package Rummikub.model.StrategyComponents
 
 trait StateInterface {
   def handle(x: Boolean): Unit

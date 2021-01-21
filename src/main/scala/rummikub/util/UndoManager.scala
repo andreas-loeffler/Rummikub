@@ -1,4 +1,4 @@
-package rummikub.util
+package Rummikub.util
 
 class UndoManager {
   private var undoStack: List[Command] = Nil

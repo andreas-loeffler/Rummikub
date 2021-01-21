@@ -1,6 +1,6 @@
-package rummikub.model
+package Rummikub.model
 
-import rummikub.model.StrategyComponents.strategyBaseImpl.FactoryStrategy
+import Rummikub.model.StrategyComponents.strategyBaseImpl.FactoryStrategy
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 

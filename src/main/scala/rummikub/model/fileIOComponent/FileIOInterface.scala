@@ -1,6 +1,6 @@
-package rummikub.model.fileIOComponent
+package Rummikub.model.fileIOComponent
 
-import rummikub.model.gameBoardComponents.GameBoardInterface
+import Rummikub.model.gameBoardComponents.GameBoardInterface
 
 trait FileIOInterface {
   def load: GameBoardInterface

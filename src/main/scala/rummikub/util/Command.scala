@@ -1,4 +1,4 @@
-package rummikub.util
+package Rummikub.util
 
 trait Command {
 

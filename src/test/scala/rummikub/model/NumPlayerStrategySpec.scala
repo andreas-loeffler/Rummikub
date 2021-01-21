@@ -1,7 +1,7 @@
-package rummikub.model
+package Rummikub.model
 
-import rummikub.model.StrategyComponents.strategyBaseImpl.NumPlayersStrategy
-import rummikub.model.gameBoardComponents.gameBoardBaseImpl.GameBoardNet
+import Rummikub.model.StrategyComponents.strategyBaseImpl.NumPlayersStrategy
+import Rummikub.model.gameBoardComponents.gameBoardBaseImpl.GameBoardNet
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 

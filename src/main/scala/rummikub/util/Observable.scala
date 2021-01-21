@@ -1,4 +1,4 @@
-package rummikub.util
+package Rummikub.util
 
 trait Observer{
   def update() : Unit

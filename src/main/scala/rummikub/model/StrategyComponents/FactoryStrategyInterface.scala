@@ -1,6 +1,6 @@
-package rummikub.model.StrategyComponents
+package Rummikub.model.StrategyComponents
 
-import rummikub.model.gameBoardComponents.gameBoardBaseImpl.GameBoardNet
+import Rummikub.model.gameBoardComponents.gameBoardBaseImpl.GameBoardNet
 
 trait FactoryStrategyInterface {
   def setSize(): GameBoardNet

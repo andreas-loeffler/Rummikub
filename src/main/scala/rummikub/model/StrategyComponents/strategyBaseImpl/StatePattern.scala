@@ -1,6 +1,6 @@
-package rummikub.model.StrategyComponents.strategyBaseImpl
+package Rummikub.model.StrategyComponents.strategyBaseImpl
 
-import rummikub.model.StrategyComponents.StateInterface
+import Rummikub.model.StrategyComponents.StateInterface
 
 object StatePattern extends StateInterface {
   def handle(x: Boolean): Unit = {

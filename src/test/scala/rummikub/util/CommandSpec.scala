@@ -1,4 +1,4 @@
-package rummikub.util
+package Rummikub.util
 
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec

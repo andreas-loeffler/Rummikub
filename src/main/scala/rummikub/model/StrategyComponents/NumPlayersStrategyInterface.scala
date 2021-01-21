@@ -1,6 +1,6 @@
-package rummikub.model.StrategyComponents
+package Rummikub.model.StrategyComponents
 
-import rummikub.model.gameBoardComponents.gameBoardBaseImpl.GameBoardNet
+import Rummikub.model.gameBoardComponents.gameBoardBaseImpl.GameBoardNet
 
 trait NumPlayersStrategyInterface {
   def playerN(x: String, name1: Option[String], name2: Option[String], name3: Option[String], gameBoardNet: GameBoardNet): GameBoardNet

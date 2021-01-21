@@ -1,11 +1,11 @@
-package rummikub.model.fileIOComponent.fileIXml
+package Rummikub.model.fileIOComponent.fileIXml
 
 import com.google.inject.Guice
 import com.google.inject.name.Names
 import net.codingwell.scalaguice.InjectorExtensions._
-import rummikub.RummikubModule
-import rummikub.model.fileIOComponent.FileIOInterface
-import rummikub.model.gameBoardComponents.GameBoardInterface
+import Rummikub.RummikubModule
+import Rummikub.model.fileIOComponent.FileIOInterface
+import Rummikub.model.gameBoardComponents.GameBoardInterface
 
 import java.io._
 import scala.xml.PrettyPrinter
