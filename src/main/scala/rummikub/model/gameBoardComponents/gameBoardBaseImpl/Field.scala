@@ -1,6 +1,6 @@
-package rummikub.model.gameBoardComponents.gameBoardBaseImpl
+package Rummikub.model.gameBoardComponents.gameBoardBaseImpl
 
-import rummikub.model.gameBoardComponents.FieldInterface
+import Rummikub.model.gameBoardComponents.FieldInterface
 
 case class Field(color: Char, value: Int) extends FieldInterface{
   def isEmpty: Boolean = (color == ' ' && value == 0)

@@ -1,6 +1,6 @@
-package rummikub.controller.controllerComponents.controllerBaseImpl
+package Rummikub.controller.controllerComponents.controllerBaseImpl
 
-import rummikub.util.Command
+import Rummikub.util.Command
 
 class SetCommand(x: Int, y: Int, colorTile: Char, valueTile: Int, controller: Controller) extends Command {
   override def doStep: Unit = controller.gameBoardNet = controller.gameBoardNet.insertTile(x, y, colorTile, valueTile)

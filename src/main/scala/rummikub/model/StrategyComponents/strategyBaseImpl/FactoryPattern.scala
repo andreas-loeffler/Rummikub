@@ -1,7 +1,7 @@
-package rummikub.model.StrategyComponents.strategyBaseImpl
+package Rummikub.model.StrategyComponents.strategyBaseImpl
 
-import rummikub.model.StrategyComponents.FactoryStrategyInterface
-import rummikub.model.gameBoardComponents.gameBoardBaseImpl.GameBoardNet
+import Rummikub.model.StrategyComponents.FactoryStrategyInterface
+import Rummikub.model.gameBoardComponents.gameBoardBaseImpl.GameBoardNet
 
 
 private class BigGameBoardNetStrategy extends FactoryStrategyInterface {

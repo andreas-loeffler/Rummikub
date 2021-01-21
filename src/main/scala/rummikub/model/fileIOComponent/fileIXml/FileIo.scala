@@ -1,14 +1,14 @@
-package rummikub.model.fileIOComponent.fileIXml
+package Rummikub.model.fileIOComponent.fileIXml
 
 import com.google.inject.Guice
 import com.google.inject.name.Names
 import net.codingwell.scalaguice.InjectorExtensions._
 import play.api.libs.json
 import play.api.libs.json.JsValue
-import rummikub.RummikubModule
-import rummikub.model.fileIOComponent.FileIOInterface
-import rummikub.model.gameBoardComponents.GameBoardInterface
-import rummikub.model.gameBoardComponents.gameBoardBaseImpl.GameBoardNet
+import Rummikub.RummikubModule
+import Rummikub.model.fileIOComponent.FileIOInterface
+import Rummikub.model.gameBoardComponents.GameBoardInterface
+import Rummikub.model.gameBoardComponents.gameBoardBaseImpl.GameBoardNet
 
 import scala.xml.{Elem, PrettyPrinter}
 import java.io._

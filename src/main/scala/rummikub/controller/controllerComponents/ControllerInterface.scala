@@ -1,6 +1,6 @@
-package rummikub.controller.controllerComponents
+package Rummikub.controller.controllerComponents
 
-import rummikub.util.Observable
+import Rummikub.util.Observable
 
 import scala.swing.Publisher
 

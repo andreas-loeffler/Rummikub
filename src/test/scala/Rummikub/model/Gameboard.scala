@@ -1,4 +1,4 @@
-package rummikub.model
+package Rummikub.model
 
 object GameBoar{
   def main(args: Array[String]): Unit = {

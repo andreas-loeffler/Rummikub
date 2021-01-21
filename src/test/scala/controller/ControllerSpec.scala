@@ -1,10 +1,10 @@
 package controller
 
-import rummikub.controller.controllerComponents.controllerBaseImpl.Controller
-import rummikub.model.gameBoardComponents.gameBoardBaseImpl.GameBoardNet
+import Rummikub.controller.controllerComponents.controllerBaseImpl.Controller
+import Rummikub.model.gameBoardComponents.gameBoardBaseImpl.GameBoardNet
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
-import rummikub.util.Observer
+import Rummikub.util.Observer
 
 class ControllerSpec extends AnyWordSpec with Matchers{
 "A Controller " when{

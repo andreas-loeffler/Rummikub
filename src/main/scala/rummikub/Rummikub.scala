@@ -1,9 +1,9 @@
-package rummikub
+package Rummikub
 
 import com.google.inject.Guice
-import rummikub.aview.TextUI
-import rummikub.aview.gui.SwingGui
-import rummikub.controller.controllerComponents.ControllerInterface
+import aview.TextUI
+import aview.gui.SwingGui
+import controller.controllerComponents.ControllerInterface
 
 import scala.io.StdIn.readLine
 

@@ -1,6 +1,6 @@
-package rummikub.aview
+package Rummikub.aview
 
-import rummikub.controller.controllerComponents.{BigGameboard, CandidatesChanged, ControllerInterface, FieldChanged, PlayersChanged}
+import Rummikub.controller.controllerComponents.{BigGameboard, CandidatesChanged, ControllerInterface, FieldChanged, PlayersChanged}
 import scala.swing.Reactor
 import scala.util.{Failure, Success, Try}
 

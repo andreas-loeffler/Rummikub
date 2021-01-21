@@ -1,7 +1,7 @@
-package rummikub.model.gameBoardComponents.gameBoardBaseImpl
+package Rummikub.model.gameBoardComponents.gameBoardBaseImpl
 
-import rummikub.model.gameBoardComponents.GameBoardInterface
-import rummikub.model.playerComponents.playerBaseImpl.Player
+import Rummikub.model.gameBoardComponents.GameBoardInterface
+import Rummikub.model.playerComponents.playerBaseImpl.Player
 
 case class GameBoardNet(gameboard: Vector[Vector[Field]]) extends GameBoardInterface {
 

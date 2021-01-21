@@ -1,6 +1,6 @@
-package rummikub.model
+package Rummikub.model
 
-import rummikub.model.playerComponents.playerBaseImpl.Player
+import Rummikub.model.playerComponents.playerBaseImpl.Player
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 

@@ -1,6 +1,6 @@
-package rummikub.model.playerComponents.playerBaseImpl
+package Rummikub.model.playerComponents.playerBaseImpl
 
-import rummikub.model.playerComponents.PlayerInterface
+import Rummikub.model.playerComponents.PlayerInterface
 
 case class Player(name: Option[String] = None, tiles: Int = 0) extends PlayerInterface{
   def isEmpty: Boolean = name.isEmpty

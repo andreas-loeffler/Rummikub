@@ -1,4 +1,4 @@
-package rummikub.model.playerComponents
+package Rummikub.model.playerComponents
 
 trait PlayerInterface {
   def isEmpty: Boolean

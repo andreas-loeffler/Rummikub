@@ -1,6 +1,6 @@
-package rummikub.aview.gui
+package Rummikub.aview.gui
 
-import rummikub.controller.controllerComponents._
+import Rummikub.controller.controllerComponents._
 
 import java.awt.Color
 import scala.swing._

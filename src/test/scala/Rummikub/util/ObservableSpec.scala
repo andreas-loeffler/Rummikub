@@ -1,4 +1,4 @@
-package rummikub.util
+package Rummikub.util
 
 import java.security.KeyStore.TrustedCertificateEntry
 

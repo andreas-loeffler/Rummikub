@@ -1,8 +1,8 @@
-package rummikub.model.StrategyComponents.strategyBaseImpl
+package Rummikub.model.StrategyComponents.strategyBaseImpl
 
-import rummikub.model.StrategyComponents.NumPlayersStrategyInterface
-import rummikub.model.gameBoardComponents.gameBoardBaseImpl.GameBoardNet
-import rummikub.model.playerComponents.playerBaseImpl.Player
+import Rummikub.model.StrategyComponents.NumPlayersStrategyInterface
+import Rummikub.model.gameBoardComponents.gameBoardBaseImpl.GameBoardNet
+import Rummikub.model.playerComponents.playerBaseImpl.Player
 
 object NumPlayersStrategy extends NumPlayersStrategyInterface{
 

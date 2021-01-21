@@ -1,12 +1,12 @@
-package rummikub.controller.controllerComponents.controllerBaseImpl
+package Rummikub.controller.controllerComponents.controllerBaseImpl
 
 import com.google.inject.{Guice, Inject, Injector}
-import rummikub.RummikubModule
-import rummikub.controller.controllerComponents.{BigGameboard, ControllerInterface, FieldChanged, PlayersChanged, SmallGameboard}
-import rummikub.model.gameBoardComponents.gameBoardBaseImpl.GameBoardNet
-import rummikub.model.StrategyComponents.strategyBaseImpl.{FactoryStrategy, NumPlayersStrategy, StatePattern}
-import rummikub.model.gameBoardComponents.GameBoardInterface
-import rummikub.util.UndoManager
+import Rummikub.RummikubModule
+import Rummikub.controller.controllerComponents.{BigGameboard, ControllerInterface, FieldChanged, PlayersChanged, SmallGameboard}
+import Rummikub.model.gameBoardComponents.gameBoardBaseImpl.GameBoardNet
+import Rummikub.model.StrategyComponents.strategyBaseImpl.{FactoryStrategy, NumPlayersStrategy, StatePattern}
+import Rummikub.model.gameBoardComponents.GameBoardInterface
+import Rummikub.util.UndoManager
 
 
 class Controller @Inject()(var gameBoardNet: GameBoardInterface) extends ControllerInterface {
@@ -93,26 +93,26 @@ class Controller @Inject()(var gameBoardNet: GameBoardInterface) extends Control
   def getplayer3Name: Option[String] = gameBoardNet.getp3()
 
   def saveXml: Unit = {
-    import rummikub.model.fileIOComponent.fileIXml.FileIo
+    import Rummikub.model.fileIOComponent.fileIXml.FileIo
     val fIO = new FileIo
     fIO.save(gameBoardNet)
   }
 
   def loadXml: Unit = {
-    import rummikub.model.fileIOComponent.fileIXml.FileIo
+    import Rummikub.model.fileIOComponent.fileIXml.FileIo
     val fIO = new FileIo
     gameBoardNet = fIO.load
     publish(new FieldChanged)
   }
 
   def saveJson: Unit = {
-    import rummikub.model.fileIOComponent.fileIOJson.FileIO
+    import Rummikub.model.fileIOComponent.fileIOJson.FileIO
     val fIO = new FileIO
     fIO.save(gameBoardNet)
   }
 
   def loadJson: Unit = {
-    import rummikub.model.fileIOComponent.fileIOJson.FileIO
+    import Rummikub.model.fileIOComponent.fileIOJson.FileIO
     val fIO = new FileIO
     gameBoardNet = fIO.load
     publish(new FieldChanged)

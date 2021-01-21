@@ -1,7 +1,7 @@
-package rummikub.model
+package Rummikub.model
 
-import rummikub.model.gameBoardComponents.gameBoardBaseImpl.GameBoardNet
-import rummikub.model.playerComponents.playerBaseImpl.Player
+import Rummikub.model.gameBoardComponents.gameBoardBaseImpl.GameBoardNet
+import Rummikub.model.playerComponents.playerBaseImpl.Player
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 
@@ -113,6 +113,9 @@ class GameBoardNetSpec extends AnyWordSpec with Matchers {
       }
       "print a error if wrong raw insert " in{
         gameBoardNet.insertTileRaw(122,1999,'G',3).toString startsWith("I")
+      }
+      "print all players " in{
+        gameBoardNet.getAllPlayer() startsWith("A")
       }
     }
   }
