@@ -1,7 +1,5 @@
 package Rummikub.util
 
-import java.security.KeyStore.TrustedCertificateEntry
-
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 
