@@ -73,10 +73,6 @@ class SwingGui(controller: ControllerInterface) extends Frame {
     color
   }
 
-  def insert(x:Int,y:Int,c:Char,v:Int): Unit = {
-
-  }
-
 
   def createGameboard: GridPanel = new GridPanel(11, 14) {
     for {indexY <- 0 until controller.gBySize} {
@@ -117,9 +113,6 @@ class SwingGui(controller: ControllerInterface) extends Frame {
       })
       contents += new MenuItem(Action("Quit") {
         System.exit(0)
-      })
-      contents += new MenuItem(Action("Create Big") {
-        controller.bigGB
       })
       contents += new MenuItem(Action("Create Small") {
         controller.smallGB

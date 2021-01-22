@@ -88,7 +88,7 @@ case class GameBoardNet(gameboard: Vector[Vector[Field]]) extends GameBoardInter
   def resetValues(x: Int, y: Int): GameBoardNet = copy(gameboard.updated(x, gameboard(x).updated(y, Field(' ', 0))))
 
 
-  def function1(x: Int, y: Int): Boolean = {
+  def validInsertBase(x: Int, y: Int): Boolean = {
     x >= 0 && x < gameboard.length && y > 0 && y < gameboard(x).length - 1
   }
 
@@ -101,7 +101,7 @@ case class GameBoardNet(gameboard: Vector[Vector[Field]]) extends GameBoardInter
   def validInsertP0b(x: Int, y: Int): Boolean = gameboard(x)(y).value >= gameboard(x)(y + 1).value
 
   def isNumberValid(x: Int, y: Int): Boolean = {
-    if (function1(x, y)) {
+    if (validInsertBase(x, y)) {
       if (validInsertBetween(x, y))
         return true
       else if (validInsertATNT0(x, y))
@@ -117,32 +117,30 @@ case class GameBoardNet(gameboard: Vector[Vector[Field]]) extends GameBoardInter
   }
 
   //Color checkers
+  def colorValidBase(x: Int, y: Int): Boolean = x >= 0 && x < gameboard.length && y > 0 && y < gameboard(x).length - 1
 
 
-  def function1Color(x: Int, y: Int): Boolean = x >= 0 && x < gameboard.length && y > 0 && y < gameboard(x).length - 1
+  def colorValidBetween(x: Int, y: Int): Boolean = (gameboard(x)(y).color == gameboard(x)(y + 1).color) && (gameboard(x)(y).color == gameboard(x)(y - 1).color) || gameboard(x)(y + 1).color == ' ' && gameboard(x)(y - 1).color == ' '
 
 
-  def function2Color(x: Int, y: Int): Boolean = (gameboard(x)(y).color == gameboard(x)(y + 1).color) && (gameboard(x)(y).color == gameboard(x)(y - 1).color) || gameboard(x)(y + 1).color == ' ' && gameboard(x)(y - 1).color == ' '
-
-
-  def function3Color(x: Int, y: Int): Boolean = (gameboard(x)(y).color.equals(gameboard(x)(y + 1).color) || gameboard(x)(y + 1).color.equals(' ')) && (gameboard(x)(y).color.equals(gameboard(x)(y - 1).color) || gameboard(x)(y - 1).color.equals(' '))
+  def colorValidATNT0(x: Int, y: Int): Boolean = (gameboard(x)(y).color.equals(gameboard(x)(y + 1).color) || gameboard(x)(y + 1).color.equals(' ')) && (gameboard(x)(y).color.equals(gameboard(x)(y - 1).color) || gameboard(x)(y - 1).color.equals(' '))
 
   //check at posi 0
-  def function4Color(x: Int, y: Int): Boolean = x < gameboard.length && y < gameboard(x).length - 1
+  def colorValidInsPos0a(x: Int, y: Int): Boolean = x < gameboard.length && y < gameboard(x).length - 1
 
-  def function5Color(x: Int, y: Int): Boolean = gameboard(x)(y).color == gameboard(x)(y + 1).color || gameboard(x)(y + 1).color == ' '
+  def colorValidInsPos0b(x: Int, y: Int): Boolean = gameboard(x)(y).color == gameboard(x)(y + 1).color || gameboard(x)(y + 1).color == ' '
 
   def isColorValid(x: Int, y: Int): Boolean = {
-    if (function1Color(x, y)) {
-      if (function2Color(x, y))
+    if (colorValidBase(x, y)) {
+      if (colorValidBetween(x, y))
         return true
-      else if (function3Color(x, y))
+      else if (colorValidATNT0(x, y))
         return true
       else
         return false
     }
-    else if (function4Color(x, y)) {
-      if (function5Color(x, y))
+    else if (colorValidInsPos0a(x, y)) {
+      if (colorValidInsPos0b(x, y))
         return true
     }
     true

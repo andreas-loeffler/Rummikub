@@ -1,17 +1,14 @@
 package Rummikub.model.fileIOComponent.fileIXml
 
-import com.google.inject.Guice
-import com.google.inject.name.Names
-import net.codingwell.scalaguice.InjectorExtensions._
-import play.api.libs.json
-import play.api.libs.json.JsValue
 import Rummikub.RummikubModule
 import Rummikub.model.fileIOComponent.FileIOInterface
 import Rummikub.model.gameBoardComponents.GameBoardInterface
-import Rummikub.model.gameBoardComponents.gameBoardBaseImpl.GameBoardNet
+import com.google.inject.Guice
+import com.google.inject.name.Names
+import net.codingwell.scalaguice.InjectorExtensions._
 
-import scala.xml.{Elem, PrettyPrinter}
 import java.io._
+import scala.xml.PrettyPrinter
 
 class FileIo extends FileIOInterface {
 
