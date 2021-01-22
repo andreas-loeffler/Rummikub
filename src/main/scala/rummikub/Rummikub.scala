@@ -16,9 +16,9 @@ object Rummikub {
   controller.smallGB
 
   def main(args: Array[String]): Unit = {
-    if (!UI_Type) {
-      val gui = new SwingGui(controller)
-    }
+      if (!UI_Type) {
+        val gui = new SwingGui(controller)
+      }
     var input: String = ""
     do {
       print(">>")
