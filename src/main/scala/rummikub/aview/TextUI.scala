@@ -1,6 +1,6 @@
 package Rummikub.aview
 
-import Rummikub.controller.controllerComponents.{BigGameboard, CandidatesChanged, ControllerInterface, FieldChanged, PlayersChanged}
+import Rummikub.controller.controllerComponents.{BigGameboard, ControllerInterface, FieldChanged, PlayersChanged}
 import scala.swing.Reactor
 import scala.util.{Failure, Success, Try}
 
@@ -38,21 +38,11 @@ class TextUI(controller: ControllerInterface) extends Reactor {
   reactions += {
     case event: BigGameboard => printTui
     case event: FieldChanged => printTui
-    case event: CandidatesChanged => printCandidates
     case event: PlayersChanged => printTui
   }
 
   def printTui: Unit = {
     println(controller.printGameBoard)
-    //println(GameStatus.message(controller.gameStatus))
   }
 
-  def printCandidates: Unit = {
-    println("Candidates: ")
-    /*for (row <- 0 until size; col <- 0 until size) {
-      if (controller.isShowCandidates(row, col)) println("("+row+","+col+"):"+controller.available(row, col).toList.sorted)
-    */
-  }
-
-  //override def update: Unit = println(controller.printGameBoard())
 }
