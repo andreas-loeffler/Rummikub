@@ -34,4 +34,6 @@ trait GameBoardInterface {
   def renamePlayer1(name:Option[String]):Unit
   def renamePlayer2(name:Option[String]):Unit
   def renamePlayer3(name:Option[String]):Unit
+  def removeSingleTile(tile: String): Unit
+  def checkTileAvailable(tile: String): Boolean
 }

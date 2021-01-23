@@ -19,16 +19,16 @@ class SwingGui(controller: ControllerInterface) extends Frame {
   }
 
   var buttons: Array[Array[Button]] = Array.ofDim[Button](controller.gBxSize, controller.gBySize)
-  var label1,label2,label3 = new TextArea()
+  var label1, label2, label3 = new TextArea()
   label1.text = controller.getplayer1Name.toString
   label2.text = controller.getplayer2Name.toString
   label3.text = controller.getplayer3Name.toString
   val optsC = new ComboBox(List('G', 'R', 'B', 'S'))
   val optsV = new ComboBox(List(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14))
-  val doneBtn: Button = new Button("Done"){
+  val doneBtn: Button = new Button("Done") {
     listenTo(mouse.clicks)
     reactions += {
-      case e: ButtonClicked => controller.threePlayerOpt(txtplayer1.text,txtplayer2.text,txtplayer3.text)
+      case e: ButtonClicked => controller.threePlayerOpt(txtplayer1.text, txtplayer2.text, txtplayer3.text)
         label1.text = controller.getplayer1Name.get
         label2.text = controller.getplayer2Name.get
         label3.text = controller.getplayer3Name.get
@@ -37,17 +37,20 @@ class SwingGui(controller: ControllerInterface) extends Frame {
   var txtplayer1 = new TextField("Enter Player1 Name") {
     listenTo(mouse.clicks)
     reactions += {
-      case e: MouseClicked => text = ""}
+      case e: MouseClicked => text = ""
+    }
   }
   var txtplayer2 = new TextField("Enter Player2 Name") {
     listenTo(mouse.clicks)
     reactions += {
-      case e: MouseClicked => text = ""}
+      case e: MouseClicked => text = ""
+    }
   }
   var txtplayer3 = new TextField("Enter Player3 Name") {
     listenTo(mouse.clicks)
     reactions += {
-      case e: MouseClicked => text = ""}
+      case e: MouseClicked => text = ""
+    }
   }
   val popupMenu: PopupMenu = new PopupMenu {
     contents += doneBtn
@@ -77,16 +80,16 @@ class SwingGui(controller: ControllerInterface) extends Frame {
   def createGameboard: GridPanel = new GridPanel(11, 14) {
     for {indexY <- 0 until controller.gBySize} {
       for {index <- 0 until controller.gBxSize} {
-        var temp = new Button(controller.getFieldValue(index,indexY).toString + controller.getFieldColor(index,indexY).toString) {
+        var temp = new Button(controller.getFieldValue(index, indexY).toString + controller.getFieldColor(index, indexY).toString) {
           reactions += {
             case e: ButtonClicked =>
-              text = optsC.selection.item + optsV.selection.item.toString
               controller.set(indexY, index, optsC.selection.item, optsV.selection.item)
+              text = controller.getFieldValue(indexY,index).toString
               background = getTileColor(controller.getFieldColor(index, indexY))
+
           }
         }
         listenTo(temp.mouse.clicks)
-
         contents += temp
         buttons(index)(indexY) = temp
       }
@@ -187,9 +190,5 @@ class SwingGui(controller: ControllerInterface) extends Frame {
       buttons(x)(y).background = getTileColor(controller.getFieldColor(x, y))
       buttons(x)(y).text = controller.getFieldValue(x, y).toString
     }
-
-    print(newPlayer1)
-    print(newPlayer2)
-    print(newPlayer3)
   }
 }

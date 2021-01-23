@@ -117,6 +117,10 @@ class GameBoardNetSpec extends AnyWordSpec with Matchers {
       "print all players " in{
         gameBoardNet.getAllPlayer() startsWith("A")
       }
+      "return false " in {
+        gameBoardNet.removeSingleTile("G1")
+        gameBoardNet.checkTileAvailable("G1") should be(false)
+      }
     }
   }
 }

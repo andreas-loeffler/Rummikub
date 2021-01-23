@@ -17,6 +17,7 @@ case class GameBoardNet(gameboard: Vector[Vector[Field]]) extends GameBoardInter
   var player2: Player = Player()
   var player3: Player = Player()
   var tiles: List[String] = List()
+  var removedTiles: List[String] = List()
 
   def renamePlayer1(name:Option[String]):Unit = {
     val player = new Player(name)
@@ -43,7 +44,7 @@ case class GameBoardNet(gameboard: Vector[Vector[Field]]) extends GameBoardInter
     tiles
   }
 
-  fillTiles()
+
 
   def getXSize(): Int = gameboard(1).size
 
@@ -149,6 +150,20 @@ case class GameBoardNet(gameboard: Vector[Vector[Field]]) extends GameBoardInter
 
   def allValid(x: Int, y: Int): Boolean = isNumberValid(x, y) && isColorValid(x, y)
 
+  def checkTileAvailable(tile: String): Boolean = {
+    if (!this.removedTiles.contains(tile)) {
+      removeSingleTile(tile)
+      return true
+    }
+    false
+  }
+
+  def removeSingleTile(tile: String): Unit = {
+    var index: Int = tiles.indexOf(tile)
+    this.tiles = tiles.patch(index, None, 1)
+    this.removedTiles = tile :: removedTiles
+  }
+
 
   def insertTile(x: Int, y: Int, c: Char, v: Int): GameBoardNet = {
     if (x > gameboard.size && y > gameboard(1).size) {
@@ -159,6 +174,16 @@ case class GameBoardNet(gameboard: Vector[Vector[Field]]) extends GameBoardInter
 
     val insertedGameboard = copy(gameboard.updated(x, gameboard(x).updated(y, Field(c, v))))
     val insertedWGameboard = copy(gameboard.updated(x, gameboard(x).updated(y, Field(' ', 0))))
+    insertedGameboard.player1 = this.player1
+    insertedGameboard.player2 = this.player2
+    insertedGameboard.player3 = this.player3
+    insertedGameboard.tiles = this.tiles
+    insertedGameboard.removedTiles = this.removedTiles
+    insertedWGameboard.player1 = this.player1
+    insertedWGameboard.player2 = this.player2
+    insertedWGameboard.player3 = this.player3
+    insertedWGameboard.tiles = this.tiles
+    insertedWGameboard.removedTiles = this.removedTiles
     if (!insertedGameboard.allValid(x, y))
       return insertedWGameboard
 

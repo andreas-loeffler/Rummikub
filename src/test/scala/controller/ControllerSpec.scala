@@ -41,6 +41,10 @@ class ControllerSpec extends AnyWordSpec with Matchers{
       controller.loadXml
       controller.loadJson
     }
+    controller.set(0,0,'G',4)
+    "print a not available message " in {
+      controller.set(0,0,'G',4).toString startsWith("Not available G4")
+    }
   }
 }
 }

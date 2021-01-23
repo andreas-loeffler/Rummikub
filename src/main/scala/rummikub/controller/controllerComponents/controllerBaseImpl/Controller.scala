@@ -64,8 +64,14 @@ class Controller @Inject()(var gameBoardNet: GameBoardInterface) extends Control
   }
 
   def set(x: Int, y: Int, colorTile: Char, valueTile: Int): Unit = {
-    undoManager.doStep(new SetCommand(x, y, colorTile, valueTile, this))
-    publish(new FieldChanged)
+    var tile = colorTile.toString + valueTile.toString
+    if (gameBoardNet.checkTileAvailable(tile)) {
+      undoManager.doStep(new SetCommand(x, y, colorTile, valueTile, this))
+      publish(new FieldChanged)
+    }
+    else {
+      print("Not available " + tile)
+    }
   }
 
   def undo: Unit = {
@@ -91,6 +97,8 @@ class Controller @Inject()(var gameBoardNet: GameBoardInterface) extends Control
   def getplayer2Name: Option[String] = gameBoardNet.getp2()
 
   def getplayer3Name: Option[String] = gameBoardNet.getp3()
+
+  def checkAvailable(tile: String): Boolean = gameBoardNet.checkTileAvailable(tile)
 
   def saveXml: Unit = {
     import Rummikub.model.fileIOComponent.fileIXml.FileIo

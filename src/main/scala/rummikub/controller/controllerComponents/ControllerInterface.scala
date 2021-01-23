@@ -50,6 +50,8 @@ trait ControllerInterface extends Observable with Publisher {
 
   def getplayer3Name: Option[String]
 
+  def checkAvailable(tile: String): Boolean
+
 }
 
 import scala.swing.event.Event
