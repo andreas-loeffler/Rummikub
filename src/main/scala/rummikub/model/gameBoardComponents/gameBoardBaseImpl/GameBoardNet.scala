@@ -19,31 +19,31 @@ case class GameBoardNet(gameboard: Vector[Vector[Field]]) extends GameBoardInter
   var tiles: List[String] = List()
   var removedTiles: List[String] = List()
 
-  def renamePlayer1(name:Option[String]):Unit = {
+  def renamePlayer1(name: Option[String]): Unit = {
     val player = new Player(name)
     player1 = player
   }
-  def renamePlayer2(name:Option[String]):Unit = {
+
+  def renamePlayer2(name: Option[String]): Unit = {
     val player = new Player(name)
     player2 = player
   }
-  def renamePlayer3(name:Option[String]):Unit = {
+
+  def renamePlayer3(name: Option[String]): Unit = {
     val player = new Player(name)
     player3 = player
   }
 
   def fillTiles(): List[String] = {
-    for (x <- 1 until 15) {
+    for (x <- 1 until 14) {
       tiles = ("S" + x) :: tiles
       tiles = ("G" + x) :: tiles
       tiles = ("R" + x) :: tiles
       tiles = ("B" + x) :: tiles
     }
     tiles = "J" :: tiles
-    tiles = "J" :: tiles
     tiles
   }
-
 
 
   def getXSize(): Int = gameboard(1).size
@@ -73,7 +73,7 @@ case class GameBoardNet(gameboard: Vector[Vector[Field]]) extends GameBoardInter
   def isEmptyBoard(): Boolean = {
     var v: Boolean = true
     for (x <- gameboard.indices) {
-      for (y <- 0 until 14) {
+      for (y <- 0 until 13) {
         if (gameboard(x)(y).isEmpty)
           v = true
         else {
@@ -148,10 +148,38 @@ case class GameBoardNet(gameboard: Vector[Vector[Field]]) extends GameBoardInter
   }
 
 
-  def allValid(x: Int, y: Int): Boolean = isNumberValid(x, y) && isColorValid(x, y)
+  def allValid(x: Int, y: Int): Boolean = ((isNumberValid(x, y) && isColorValid(x, y)) || isSameNumberdifColor(x, y))
+
+  def isSameNumberdifColor(x: Int, y: Int): Boolean = {
+    if (y != 0 && y != 1) {
+      if (gameboard(x)(y - 1).value != gameboard(x)(y).value || !checkPrevPrev(x, y)) {
+        return false
+      }
+      else if (gameboard(x)(y - 1) == null) {
+        return true
+      }
+    } else if (y == 0) {
+      return true
+    } else if (y == 1) {
+      return gameboard(x)(y - 1).value == gameboard(x)(y).value
+    }
+    true
+
+  }
+
+  def checkPrevPrev(x: Int, y: Int): Boolean = {
+    if (gameboard(x)(y - 2).isEmpty) {
+      return true
+    }
+    else if (gameboard(x)(y - 2).value == gameboard(x)(y).value) {
+      return true
+    }
+    false
+  }
+
 
   def checkTileAvailable(tile: String): Boolean = {
-    if (!this.removedTiles.contains(tile)) {
+    if (this.tiles.contains(tile)) {
       removeSingleTile(tile)
       return true
     }
@@ -162,6 +190,12 @@ case class GameBoardNet(gameboard: Vector[Vector[Field]]) extends GameBoardInter
     var index: Int = tiles.indexOf(tile)
     this.tiles = tiles.patch(index, None, 1)
     this.removedTiles = tile :: removedTiles
+  }
+
+  def redoRemove(tile: String): Unit = {
+    var index = removedTiles.indexOf(tile)
+    this.removedTiles = this.removedTiles.patch(index, None, 1)
+    this.tiles = tile :: tiles
   }
 
 
@@ -184,8 +218,10 @@ case class GameBoardNet(gameboard: Vector[Vector[Field]]) extends GameBoardInter
     insertedWGameboard.player3 = this.player3
     insertedWGameboard.tiles = this.tiles
     insertedWGameboard.removedTiles = this.removedTiles
-    if (!insertedGameboard.allValid(x, y))
+    if (!insertedGameboard.allValid(x, y)) {
+      insertedWGameboard.redoRemove(tile = c + v.toString)
       return insertedWGameboard
+    }
 
     insertedGameboard
   }
@@ -201,9 +237,11 @@ case class GameBoardNet(gameboard: Vector[Vector[Field]]) extends GameBoardInter
     return insertedGameboard
   }
 
-  override def getp1():Option[String] = player1.name
-  override def getp2():Option[String] = player2.name
-  override def getp3():Option[String] = player3.name
+  override def getp1(): Option[String] = player1.name
+
+  override def getp2(): Option[String] = player2.name
+
+  override def getp3(): Option[String] = player3.name
 
   override def returnGB(): GameBoardNet = this
 

@@ -8,6 +8,7 @@ private class BigGameBoardNetStrategy extends FactoryStrategyInterface {
   override def setSize(): GameBoardNet = {
     val gameBoardNet = new GameBoardNet(xS = 22, yS = 28)
     gameBoardNet.fillTiles()
+    gameBoardNet.fillTiles()
     gameBoardNet
   }
 }
@@ -15,6 +16,7 @@ private class BigGameBoardNetStrategy extends FactoryStrategyInterface {
 private class SmallGameBoardNetStrategy extends FactoryStrategyInterface {
   override def setSize(): GameBoardNet = {
     val gameBoardNet = new GameBoardNet(xS = 11, yS = 14)
+    gameBoardNet.fillTiles()
     gameBoardNet.fillTiles()
     gameBoardNet
   }

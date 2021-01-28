@@ -24,7 +24,7 @@ class SwingGui(controller: ControllerInterface) extends Frame {
   label2.text = controller.getplayer2Name.toString
   label3.text = controller.getplayer3Name.toString
   val optsC = new ComboBox(List('G', 'R', 'B', 'S'))
-  val optsV = new ComboBox(List(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14))
+  val optsV = new ComboBox(List(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13))
   val doneBtn: Button = new Button("Done") {
     listenTo(mouse.clicks)
     reactions += {
