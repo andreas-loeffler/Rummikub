@@ -151,7 +151,7 @@ case class GameBoardNet(gameboard: Vector[Vector[Field]]) extends GameBoardInter
   def allValid(x: Int, y: Int): Boolean = ((isNumberValid(x, y) && isColorValid(x, y)) || isSameNumberdifColor(x, y))
 
   def isSameNumberdifColor(x: Int, y: Int): Boolean = {
-    if (y != 0 && y != 1) {
+    if (y > 1) {
       if (gameboard(x)(y - 1).value != gameboard(x)(y).value || !checkPrevPrev(x, y)) {
         return false
       }

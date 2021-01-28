@@ -28,7 +28,7 @@ class GameBoardNetSpec extends AnyWordSpec with Matchers {
         gameBoardNet.colorValidATNT0(0, 1) should be(true)
         gameBoardNet.colorValidInsPos0a(0, 0) should be(true)
         gameBoardNet.colorValidInsPos0b(0, 0) should be(false)
-        gameBoardNet.colorValidInsPos0b(0,1) should be (true)
+        gameBoardNet.colorValidInsPos0b(0, 1) should be(true)
         gameBoardNet.validInsertBase(0, 1) should be(true)
         gameBoardNet.validInsertATNT0(0, 1) should be(true)
         gameBoardNet.validInsertP0a(0, 0) should be(true)
@@ -46,7 +46,7 @@ class GameBoardNetSpec extends AnyWordSpec with Matchers {
         gameBoardNet.insertTile(0, 3, 'Y', 8).toString startsWith "Y"
         gameBoardNet.insertTile(0, 13, 'B', 8).toString startsWith "Y"
       }
-      "should not be empty" in{
+      "should not be empty" in {
         gameBoardNet.isEmptyBoard() should be(false)
       }
       "should be valid/true " in {
@@ -75,49 +75,61 @@ class GameBoardNetSpec extends AnyWordSpec with Matchers {
       "set tiles" in {
         gameBoardNet.fillTiles()
       }
-      "be empty" in{
-        gameBoardNet.isEmptyBoard() should be (true)
+      "be empty" in {
+        gameBoardNet.isEmptyBoard() should be(true)
       }
-      "return x size" in{
+      "return x size" in {
         gameBoardNet.getXSize() should be(14)
       }
-      "return y size" in{
+      "return y size" in {
         gameBoardNet.getYSize() should be(11)
       }
-      "add players in" in{
+      "add players in" in {
         gameBoardNet.player1 = Player(Some("Adam"))
         gameBoardNet.player2 = Player(Some("Josef"))
       }
-      "print the score" in{
+      "print the score" in {
         gameBoardNet.printGameboard() startsWith "Adam"
       }
-      "add another player " in{
-        gameBoardNet.player3 =Player(Some("Eva"))
+      "add another player " in {
+        gameBoardNet.player3 = Player(Some("Eva"))
       }
-      "print the score again" in{
-        gameBoardNet.printGameboard() startsWith("Adam")
+      "print the score again" in {
+        gameBoardNet.printGameboard() startsWith ("Adam")
       }
       "insert a tile at wrong posi " in {
-        gameBoardNet.insertTile(12,15,'Y',6).toString startsWith(" ")
+        gameBoardNet.insertTile(12, 15, 'G', 6).toString startsWith (" ")
       }
-      "return the name of players" in{
-        gameBoardNet.getp1().toString startsWith("A")
-        gameBoardNet.getp2().toString startsWith("J")
-        gameBoardNet.getp3().toString startsWith("E")
+      "return the name of players" in {
+        gameBoardNet.getp1().toString startsWith ("A")
+        gameBoardNet.getp2().toString startsWith ("J")
+        gameBoardNet.getp3().toString startsWith ("E")
       }
-      "return a field " in{
-        gameBoardNet.getField(2,2).toString should be(" 0")
+      "return a field " in {
+        gameBoardNet.getField(2, 2).toString should be(" 0")
       }
-      "insert a tile raw " in{
-        gameBoardNet.insertTileRaw(0,0,'S',3)
+      "insert a tile raw " in {
+        gameBoardNet.insertTileRaw(0, 0, 'S', 3)
+        gameBoardNet.insertTile(0, 1, 'B', 3)
+        gameBoardNet.insertTile(0, 2, 'R', 3)
       }
-      "print a error if wrong raw insert " in{
-        gameBoardNet.insertTileRaw(122,1999,'G',3).toString startsWith("I")
+      "return true " in {
+        gameBoardNet.checkTileAvailable("S3") should be(true)
       }
-      "print all players " in{
-        gameBoardNet.getAllPlayer() startsWith("A")
+      "return also true " in {
+        gameBoardNet.isSameNumberdifColor(0, 0) should be(true)
+        gameBoardNet.isSameNumberdifColor(0, 6) should be(true)
       }
       "return false " in {
+        gameBoardNet.checkPrevPrev(0,2) should be(true)
+      }
+      "print a error if wrong raw insert " in {
+        gameBoardNet.insertTileRaw(122, 1999, 'G', 3).toString startsWith ("I")
+      }
+      "print all players " in {
+        gameBoardNet.getAllPlayer() startsWith ("A")
+      }
+      "return also false " in {
         gameBoardNet.removeSingleTile("G1")
         gameBoardNet.checkTileAvailable("G1") should be(false)
       }
